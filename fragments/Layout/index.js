@@ -7,7 +7,7 @@ import Style from './Style'
 
 const App = s.div`
   width: 100%;
-  min-height: 72vh;
+  min-height: 75vh;
 `
 
 const Layout = ({ children }) => (
