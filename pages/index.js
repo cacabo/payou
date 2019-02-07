@@ -2,10 +2,13 @@ import React from 'react'
 import Link from 'next/link'
 
 import Layout from '../fragments/Layout/index'
+import Home from '../fragments/Home/index'
 import { Container } from '../components'
 
 export default () => (
   <Layout>
+    <Home />
+
     <Container>
       <ul>
         <li><Link href='/a' as='/a'><a>a</a></Link></li>

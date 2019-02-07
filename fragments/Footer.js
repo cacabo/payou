@@ -1,17 +1,24 @@
 import s from 'styled-components'
+
 import { Container } from '../components'
+import { SNOW } from '../constants/colors'
 
 const FooterWrapper = s.div`
   width: 100%;
   padding: 1rem 0;
-  background: black;
-  color: white;
+  background: ${SNOW};
+
+  p {
+    margin-bottom: 0;
+  }
 `
+
+const Logo = s.h4``
 
 export default () => (
   <FooterWrapper>
     <Container>
-      <p>This is the footer</p>
+      <Logo>SalaryMatch</Logo>
     </Container>
   </FooterWrapper>
 )

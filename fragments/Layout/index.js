@@ -7,8 +7,10 @@ import Style from './Style'
 
 const App = s.div`
   width: 100%;
-  min-height: 75vh;
+  min-height: calc(100vh - 144px);
 `
+
+// TODO SEO
 
 const Layout = ({ children }) => (
   <div>
