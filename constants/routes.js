@@ -1,2 +1,3 @@
 export const HOME_ROUTE = '/'
-export const BUSINESS_ROTUE = '/business'
+export const ABOUT_ROUTE = '/about'
+export const EMPLOYERS_ROUTE = '/employers'

@@ -3,7 +3,7 @@ import s from 'styled-components'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
-import { GREEN, WHITE, FOREST } from '../constants/colors'
+import { GREEN, WHITE, GREENER } from '../constants/colors'
 
 const BtnWrapper = s.a`
   background: ${GREEN};
@@ -16,7 +16,7 @@ const BtnWrapper = s.a`
   font-size: 80%;
 
   &:hover {
-    background: ${FOREST};
+    background: ${GREENER};
   }
 
   &:hover,

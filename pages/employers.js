@@ -1,10 +1,10 @@
 import React from 'react'
 
 import Layout from '../fragments/Layout/index'
-import Home from '../fragments/Home/index'
+import Employers from '../fragments/Employers/index'
 
 export default () => (
   <Layout>
-    <Home />
+    <Employers />
   </Layout>
 )
