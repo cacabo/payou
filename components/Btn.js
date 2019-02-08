@@ -1,14 +1,23 @@
 import s from 'styled-components'
 import Link from 'next/link'
-import { PURPLE, WHITE } from '../constants/colors'
+import { GREEN, WHITE } from '../constants/colors'
 
 const BtnWrapper = s.a`
-  background: ${PURPLE};
+  background: ${GREEN};
   padding: 12px 24px;
   border-radius: 4px;
   color: ${WHITE};
   display: inline-block;
   cursor: pointer;
+  font-weight: bold;
+
+  &:hover,
+  &:focus,
+  &:visited,
+  &:active {
+    color: ${WHITE};
+    text-decoration: none;
+  }
 `
 
 export const Btn = ({ href, children }) => (
