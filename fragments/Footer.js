@@ -1,6 +1,7 @@
+import React from 'react'
 import s from 'styled-components'
 
-import { Container } from '../components'
+import { Container, Section } from '../components'
 import { SNOW } from '../constants/colors'
 
 const FooterWrapper = s.div`
@@ -17,8 +18,13 @@ const Logo = s.h4``
 
 export default () => (
   <FooterWrapper>
-    <Container>
-      <Logo>SalaryMatch</Logo>
-    </Container>
+    <Section>
+      <Container>
+        <Logo>SalaryMatch</Logo>
+        <p>
+          salary-match.com &copy; 2019, all rights reserved.
+        </p>
+      </Container>
+    </Section>
   </FooterWrapper>
 )
