@@ -1,5 +1,7 @@
+import React from 'react'
 import Head from 'next/head'
 import s from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Nav from '../Nav'
 import Footer from '../Footer'
@@ -30,5 +32,9 @@ const Layout = ({ children }) => (
     <Footer />
   </div>
 )
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default Layout

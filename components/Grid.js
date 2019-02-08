@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import { SM, MD, LG, minWidth, maxWidth } from '../constants/widths'
+import {
+  SM,
+  MD,
+  LG,
+  minWidth,
+  maxWidth,
+} from '../constants/widths'
 
 export const Container = styled.div`
   width: 100%;

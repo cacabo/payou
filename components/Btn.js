@@ -1,5 +1,8 @@
+import React from 'react'
 import s from 'styled-components'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
+
 import { GREEN, WHITE, FOREST } from '../constants/colors'
 
 const BtnWrapper = s.a`
@@ -25,6 +28,17 @@ const BtnWrapper = s.a`
   }
 `
 
+export const ActionBtn = ({ handleClick, children }) => (
+  <BtnWrapper onClick={handleClick}>
+    {children}
+  </BtnWrapper>
+)
+
+ActionBtn.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+}
+
 export const Btn = ({ href, children }) => (
   <Link href={href}>
     <BtnWrapper>
@@ -32,3 +46,8 @@ export const Btn = ({ href, children }) => (
     </BtnWrapper>
   </Link>
 )
+
+Btn.propTypes = {
+  href: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+}
