@@ -1,5 +1,7 @@
 const express = require('express')
 const next = require('next')
+const bodyParser = require('body-parser')
+const path = require('path')
 
 const routes = require('./constants/routes')
 
@@ -12,7 +14,19 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get(routes.HOME_PATH, (req, res) => handle(req, res))
+    // Middleware
+    server.use(bodyParser.json())
+    server.use(express.static(path.join(__dirname, 'public')))
+
+    // server.get(routes.HOME_ROUTE, (req, res) => handle(req, res))
+
+    server.get(routes.HOME_ROUTE, (req, res) => (
+      app.render(req, res, routes.HOME_ROUTE)
+    ))
+
+    server.get(routes.WILD_ROUTE, (req, res) => (
+      handle(req, res)
+    ))
 
     server.listen(port, (err) => {
       if (err) throw err
