@@ -7,7 +7,7 @@ import { GREEN, WHITE, GREENER } from '../constants/colors'
 
 const BtnWrapper = s.a`
   background: ${GREEN};
-  padding: 8px 24px;
+  padding: 12px 24px;
   border-radius: 4px;
   color: ${WHITE};
   display: inline-block;

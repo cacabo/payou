@@ -6,9 +6,9 @@ import { Container } from '../components'
 import {
   WHITE,
   BORDER,
-  GRAY,
+  SLATE,
+  DARK_SLATE,
   GREEN,
-  BLACK,
 } from '../constants/colors'
 import { HOME_ROUTE, EMPLOYERS_ROUTE, ABOUT_ROUTE } from '../constants/routes'
 
@@ -28,7 +28,7 @@ const NavSpace = s.div`
 `
 
 const Logo = s.a`
-  color: ${BLACK} !important;
+  color: ${GREEN} !important;
   font-weight: bold;
   text-decoration: none !important;
   display: inline-block;
@@ -41,7 +41,7 @@ const Links = s.div`
   float: right;
 
   a {
-    color: ${GRAY};
+    color: ${SLATE} !important;
     cursor: pointer;
     display: inline-block;
     width: auto;
@@ -52,7 +52,7 @@ const Links = s.div`
     text-decoration: none !important;
 
     &:hover {
-      color: ${GREEN};
+      color: ${DARK_SLATE} !important;
     }
   }
 `
