@@ -1,3 +1,5 @@
-export const HOME_ROUTE = '/'
-export const ABOUT_ROUTE = '/about'
-export const EMPLOYERS_ROUTE = '/employers'
+module.exports = {
+  HOME_ROUTE: '/',
+  ABOUT_ROUTE: '/about',
+  EMPLOYERS_ROUTE: '/employers',
+}
