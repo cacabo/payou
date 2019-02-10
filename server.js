@@ -4,6 +4,9 @@ const bodyParser = require('body-parser')
 const path = require('path')
 
 const routes = require('./constants/routes')
+const leadsRouter = require('./server/routes/leads')
+
+const DB = require('./server/database/db')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -18,7 +21,7 @@ app.prepare()
     server.use(bodyParser.json())
     server.use(express.static(path.join(__dirname, 'public')))
 
-    // server.get(routes.HOME_ROUTE, (req, res) => handle(req, res))
+    server.use('/api/leads', leadsRouter(DB))
 
     server.get(routes.HOME_ROUTE, (req, res) => (
       app.render(req, res, routes.HOME_ROUTE)
