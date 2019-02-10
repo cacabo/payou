@@ -54,7 +54,7 @@ export default () => (
           {'We integrate within hours with the software you already use and our model does not interfere with your taxes.'}
         </Text>
 
-        <ActionBtn handleClick={() => console.log('TODO')}>
+        <ActionBtn handleClick={() => 'TODO'}>
           Get in touch
         </ActionBtn>
       </Container>
