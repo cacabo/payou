@@ -1,5 +1,7 @@
 import React from 'react'
-import s from 'styled-components'
+
+import Process from './Process'
+import Hero from './Hero'
 
 import {
   Container,
@@ -8,43 +10,13 @@ import {
   Btn,
   Title,
   Text,
-  StrongText,
 } from '../../components'
 import { SNOW } from '../../constants/colors'
 
-const List = s.ol`
-  li {
-    p {
-      margin-bottom: calc(1.45rem / 8) !important;
-    }
-  }
-`
-
-const steps = [
-  {
-    title: 'Create an Account',
-    text: 'Verify your employment & personal information. It only takes a few minutes.',
-  },
-  {
-    title: 'Hassle-free Online Application',
-    text: 'Choose your desired loan amount and with our proprietary model, we help you find the interest rate that best fits your needs',
-  },
-  {
-    title: 'Review & Accept',
-    text: 'Evaluate and sign your personalized loan terms, including the proposed repayment schedule and total costs.',
-  },
-  {
-    title: 'Receive the Funds',
-    text: 'Within 3* business days of applying, you receive the money into your account',
-  },
-  {
-    title: 'Repayment',
-    text: 'Each paycycle we will automatically deduct your loan payments from your paycheck, so you don’t have to worry about managing your cash flows.',
-  },
-]
-
 export default () => (
   <>
+    <Hero />
+
     <Section background={SNOW}>
       <Container>
         <Preheading>Mission</Preheading>
@@ -91,24 +63,7 @@ export default () => (
         </ul>
       </Container>
     </Section>
-    <Section>
-      <Container>
-        <Preheading>Our Process</Preheading>
-        <Title>We make it easy</Title>
 
-        <List>
-          {steps.map(({ title, text }) => (
-            <li key={`${title}-${text}`}>
-              <StrongText>{title}</StrongText>
-              <Text>{text}</Text>
-            </li>
-          ))}
-        </List>
-
-        <Text>
-          {'Best part is: after you apply, your part of the equation is complete. As soon as we approve your loan, we handle the rest!'}
-        </Text>
-      </Container>
-    </Section>
+    <Process />
   </>
 )

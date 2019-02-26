@@ -37,6 +37,6 @@ export const Row = styled.div`
 `
 
 export const Col = styled.div`
-  flex: 1;
+  flex: ${({ width }) => (width ? 'none' : '1')};
   width: ${({ width }) => width || 'auto'};
 `

@@ -9,6 +9,7 @@ export const BLACK = '#000'
 export const BORDER = 'rgba(0, 0, 0, 0.05)'
 
 // Colors
+export const MINT = '#cbf2d6'
 export const GREEN = '#5fcf80'
 export const GREENER = '#58bc76'
 export const FOREST = '#34ad58'

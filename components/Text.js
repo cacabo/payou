@@ -6,6 +6,7 @@ export const Title = s.h2``
 
 export const Text = s.p`
   color: ${DARK_GRAY};
+  ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
 `
 
 export const MediumText = s(Text)`
