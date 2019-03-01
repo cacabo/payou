@@ -3,8 +3,15 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const EmployerLeadSchema = new Schema({
-  name: {
-    required: [true, 'Name is required'],
+  firstName: {
+    required: [true, 'First name is required'],
+    type: String,
+    maxLength: 500,
+    minLength: 1,
+  },
+
+  lastName: {
+    required: [true, 'Last name is required'],
     type: String,
     maxLength: 500,
     minLength: 1,
@@ -23,6 +30,13 @@ const EmployerLeadSchema = new Schema({
       },
       message: props => `${props.value} is not a valid email address`,
     },
+  },
+
+  company: {
+    required: [true, 'Company name is required'],
+    type: String,
+    maxLength: 500,
+    minLength: 1,
   },
 
   message: {

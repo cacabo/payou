@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import {
   SM,
   MD,
@@ -39,4 +40,13 @@ export const Row = styled.div`
 export const Col = styled.div`
   flex: ${({ width }) => (width ? 'none' : '1')};
   width: ${({ width }) => width || 'auto'};
+`
+
+export const ColSpace = styled(Col)`
+  flex: none;
+  width: ${({ width }) => width || '1rem'};
+
+  ${maxWidth(SM)} {
+    display: none;
+  }
 `

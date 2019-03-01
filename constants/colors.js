@@ -3,6 +3,7 @@ export const WHITE = '#FFF'
 export const WHITE_ALPHA = a => `rgba(255, 255, 255, ${a || 0.95})`
 export const SNOW = '#edeff0'
 export const GRAY = '#9da0ad'
+export const LIGHT_GRAY_ALPHA = 'rgba(239, 239, 239, 0.75)'
 export const SLATE = '#7b8b8e'
 export const DARK_SLATE = '#4b5658'
 export const DARK_GRAY = '#576366'
@@ -18,3 +19,9 @@ export const GOBLIN = '#2d8246'
 
 // Secondary colors
 export const PURPLE = '#674993'
+
+// Error colors
+export const RED = '#ff4c7c'
+export const TRANSPARENT_RED = 'rgba(255, 76, 124, 0.5)'
+export const PINK = '#FFDBDB'
+export const RED_BORDER = 'rgba(245, 112, 128, 0.25)'

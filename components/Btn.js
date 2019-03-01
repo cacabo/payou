@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { GREEN, WHITE, GREENER } from '../constants/colors'
 
-const BtnWrapper = s.a`
+const styles = `
   background: ${GREEN};
   padding: 12px 24px;
   border-radius: 4px;
@@ -28,6 +28,8 @@ const BtnWrapper = s.a`
   }
 `
 
+const BtnWrapper = s.a`${styles}`
+
 export const ActionBtn = ({ handleClick, children }) => (
   <BtnWrapper onClick={handleClick}>
     {children}
@@ -38,6 +40,8 @@ ActionBtn.propTypes = {
   handleClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 }
+
+export const BtnInput = s.input`${styles}`
 
 export const Btn = ({ href, children }) => (
   <Link href={href}>
