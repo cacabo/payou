@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
-const EmployerLeadSchema = new Schema({
+const EmployeeLeadSchema = new Schema({
   firstName: {
     required: [true, 'First name is required'],
     type: String,
@@ -56,4 +56,4 @@ const EmployerLeadSchema = new Schema({
   timestamps: true,
 })
 
-module.exports = mongoose.model('EmployerLead', EmployerLeadSchema)
+module.exports = mongoose.model('EmployeeLead', EmployeeLeadSchema)

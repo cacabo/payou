@@ -12,6 +12,7 @@ export const BORDER = 'rgba(0, 0, 0, 0.05)'
 
 // Primary colors
 export const MINT = '#cbf2d6'
+export const GREEN_BORDER = 'rgba(95, 207, 128, 0.25)'
 export const GREEN = '#5fcf80'
 export const GREENER = '#58bc76'
 export const FOREST = '#34ad58'

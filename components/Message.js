@@ -7,8 +7,8 @@ import {
   RED,
   RED_BORDER,
   MINT,
-  GOBLIN,
   GREENER,
+  GREEN_BORDER,
 } from '../constants/colors'
 
 import { Text } from './Text'
@@ -17,7 +17,7 @@ const Wrapper = s.div`
   width: 100%;
   border-width: 2px;
   border-style: solid;
-  border-radius: 0;
+  border-radius: 4px;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
 
@@ -34,7 +34,7 @@ const ErrorWrapper = s(Wrapper)`
 
 const SuccessWrapper = s(Wrapper)`
   background: ${MINT};
-  color: ${GOBLIN};
+  color: ${GREEN_BORDER};
   border-color: ${GREENER};
 `
 

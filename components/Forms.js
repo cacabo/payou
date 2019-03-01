@@ -11,7 +11,7 @@ import { BtnInput } from './Btn'
 
 const styles = `
   margin-bottom: 1rem !important;
-  border-radius: 0 !important;
+  border-radius: 4px !important;
   border: 2px solid ${BORDER};
   background-color: ${WHITE};
   background-clip: padding-box;

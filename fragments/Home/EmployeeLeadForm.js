@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import fetch from 'unfetch'
-import { NEW_EMPLOYER_LEAD_ROUTE } from '../../constants/routes'
+import { NEW_EMPLOYEE_LEAD_ROUTE } from '../../constants/routes'
 
 import {
   ErrorMessage,
@@ -75,7 +75,7 @@ class EmployerLeadForm extends Component {
       message,
     } = this.state
 
-    fetch(NEW_EMPLOYER_LEAD_ROUTE, {
+    fetch(NEW_EMPLOYEE_LEAD_ROUTE, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

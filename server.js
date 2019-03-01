@@ -2,6 +2,7 @@ const express = require('express')
 const next = require('next')
 const bodyParser = require('body-parser')
 const path = require('path')
+const sgMail = require('@sendgrid/mail')
 
 const routes = require('./constants/routes')
 const leadsRouter = require('./server/routes/leads')
@@ -12,6 +13,20 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+
+const { SENDGRID_API_KEY, EMAIL } = process.env
+
+if (!SENDGRID_API_KEY) {
+  console.log('Missing SENDGRID_API_KEY') // eslint-disable-line
+  process.exit(1)
+}
+
+if (!EMAIL) {
+  console.log('Missing EMAIL') // eslint-disable-line
+  process.exit(1)
+}
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 app.prepare()
   .then(() => {

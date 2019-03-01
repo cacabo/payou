@@ -25,7 +25,7 @@ export default () => (
         <Row>
           <Col width="75%">
             <Title>
-              {'Hi. We\'re Salarymatch—a seamless way for employees to take out cheap, salary-deducted loans'}
+              {'Hi. We\'re Salarymatch—a seamless way for employees like you to take out cheap, salary-deducted loans'}
             </Title>
             <Text>We give you financial security by cutting out fees and payment deadlines</Text>
           </Col>
