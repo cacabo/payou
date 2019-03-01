@@ -26,11 +26,10 @@ const TableHead = s.thead`
 
 export default () => (
   <>
-    <BackgroundSection backgroundImage="/static/img/bg-1-01.svg">
+    <BackgroundSection backgroundImage="/static/img/bg-1-01.svg" hero>
       <Container>
         <Row>
           <Col width="70%">
-            <Preheading white>Mission</Preheading>
             <Title white>Making it easier on your employees</Title>
 
             <Text white>

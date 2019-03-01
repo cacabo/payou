@@ -1,7 +1,13 @@
 import s from 'styled-components'
 
 export const Section = s.section`
-  padding: calc(2rem + 2.5%) 0 calc(1rem + 2.5%) 0;
+  padding: ${({ hero }) => (
+    hero ? (`
+      calc(6rem + 2.5%) 0 calc(2rem + 2.5%) 0;
+    `) : (`
+      calc(2rem + 2.5%) 0 calc(1rem + 2.5%) 0;
+    `)
+  )}
 
   background: ${({ background }) => background || 'transparent'};
 `

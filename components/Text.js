@@ -27,7 +27,7 @@ export const StrongText = s(Text)`
   font-weight: 700;
 `
 
-export const Preheading = s.h6`
+export const Preheading = s.h5`
   margin-bottom: 2.175rem;
   color: ${({ white }) => (white ? WHITE_ALPHA(0.8) : SLATE)};
 `
