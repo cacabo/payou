@@ -6,7 +6,7 @@ import Links from './Links'
 import Bars from './Bars'
 import { Container } from '../../components'
 import {
-  WHITE,
+  WHITE_ALPHA,
   BORDER,
   GREEN,
 } from '../../constants/colors'
@@ -14,10 +14,11 @@ import { MD, maxWidth } from '../../constants/widths'
 import { HOME_ROUTE } from '../../constants/routes'
 
 const Z_INDEX = 1300
+const NAV_HEIGHT = '63px'
 
 const NavWrapper = s.nav`
   width: 100%;
-  background: ${WHITE};
+  background: ${WHITE_ALPHA(0.95)};
   border-bottom: 1px solid ${BORDER};
   padding: 1rem 0;
   position: fixed;
@@ -42,7 +43,7 @@ const Shade = s.div`
 const NavSpace = s.div`
   display: block;
   width: 100%;
-  height: 56px;
+  height: ${NAV_HEIGHT};
 `
 
 const Logo = s.a`

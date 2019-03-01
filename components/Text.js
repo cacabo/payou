@@ -5,6 +5,7 @@ import {
   BLACK,
   SLATE,
   WHITE,
+  WHITE_ALPHA,
 } from '../constants/colors'
 
 export const Title = s.h2`
@@ -28,7 +29,7 @@ export const StrongText = s(Text)`
 
 export const Preheading = s.h6`
   margin-bottom: 2.175rem;
-  color: ${({ white }) => (white ? WHITE : SLATE)};
+  color: ${({ white }) => (white ? WHITE_ALPHA(0.8) : SLATE)};
 `
 
 export const Blockquote = s.blockquote`

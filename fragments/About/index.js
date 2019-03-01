@@ -2,19 +2,19 @@ import React from 'react'
 import {
   Container,
   Section,
+  BackgroundSection,
   Preheading,
   Title,
   Text,
   Blockquote,
 } from '../../components'
-import { SNOW } from '../../constants/colors'
 
 export default () => (
   <>
-    <Section background={SNOW}>
+    <BackgroundSection backgroundImage="/static/img/bg-2.svg">
       <Container>
-        <Preheading>The beginning</Preheading>
-        <Title>As students, we realized two things</Title>
+        <Preheading white>The beginning</Preheading>
+        <Title white>As students, we realized two things</Title>
 
         <ol>
           <li>The importance of learning how to manage your money properly</li>
@@ -23,7 +23,7 @@ export default () => (
           </li>
         </ol>
       </Container>
-    </Section>
+    </BackgroundSection>
 
     <Section>
       <Container>
