@@ -23,7 +23,7 @@ export const MediumText = s(Text)`
 `
 
 export const StrongText = s(Text)`
-  color: ${BLACK};
+  color: ${({ white }) => (white ? WHITE : BLACK)};
   font-weight: 700;
 `
 

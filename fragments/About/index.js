@@ -7,6 +7,7 @@ import {
   Title,
   Text,
   Blockquote,
+  List,
 } from '../../components'
 
 export default () => (
@@ -16,12 +17,14 @@ export default () => (
         <Preheading white>The beginning</Preheading>
         <Title white>As students, we realized two things</Title>
 
-        <ol>
-          <li>The importance of learning how to manage your money properly</li>
-          <li>
-            {'The difficulty of accessing reasonable credit without a solid financial background'}
-          </li>
-        </ol>
+        <List
+          center
+          white
+          items={[
+            { text: 'The importance of learning how to manage your money properly' },
+            { text: 'The difficulty of accessing reasonable credit without a solid financial background' },
+          ]}
+        />
       </Container>
     </BackgroundSection>
 

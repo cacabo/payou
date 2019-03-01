@@ -7,4 +7,7 @@ export const Flexbox = s.div`
 
 export const Flex = s.div`
   flex: 1;
+  ${({ paddingTop }) => paddingTop && (`
+    padding-top: ${paddingTop};
+  `)}
 `

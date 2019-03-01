@@ -1,24 +1,14 @@
 import React from 'react'
-import s from 'styled-components'
-import PropTypes from 'prop-types'
 
 import {
   Container,
-  Flex,
-  Flexbox,
   Section,
   Preheading,
   Title,
   Text,
   StrongText,
+  List,
 } from '../../components'
-import { MINT, FOREST } from '../../constants/colors'
-
-const List = s.div`
-  p {
-    margin-bottom: calc(1.45rem / 8) !important;
-  }
-`
 
 const steps = [
   {
@@ -43,47 +33,13 @@ const steps = [
   },
 ]
 
-const NumberCircle = s.div`
-  width: 2.5rem;
-  height: 2.5rem;
-  background: ${MINT};
-  border-radius: 50%;
-  color: ${FOREST};
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-align: center;
-  padding-top: 0.65rem;
-  margin-right: 1.25rem;
-`
-
-const ListNumber = ({ number }) => (
-  <NumberCircle>
-    {number}
-  </NumberCircle>
-)
-
-ListNumber.propTypes = {
-  number: PropTypes.number.isRequired,
-}
-
 export default () => (
   <Section>
     <Container>
       <Preheading>Our Process</Preheading>
       <Title>We make it easy</Title>
 
-      <List>
-        {steps.map(({ title, text }, idx) => (
-          <Flexbox key={`${title}-${text}`} marginBottom="1.5rem">
-            <ListNumber number={idx + 1} />
-
-            <Flex>
-              <StrongText>{title}</StrongText>
-              <Text>{text}</Text>
-            </Flex>
-          </Flexbox>
-        ))}
-      </List>
+      <List items={steps} />
 
       <StrongText marginBottom="0.5rem">
         The best part?
