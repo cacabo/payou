@@ -18,11 +18,11 @@ export const Container = styled.div`
   }
 
   ${minWidth(MD)} {
-    padding: 0 8%;
+    padding: 0 6%;
   }
 
   ${minWidth(LG)} {
-    padding: 0 16%;
+    padding: 0 8%;
   }
 `
 

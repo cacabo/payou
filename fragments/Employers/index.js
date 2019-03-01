@@ -4,12 +4,14 @@ import s from 'styled-components'
 import {
   Container,
   Section,
+  BackgroundSection,
   Preheading,
   Title,
   ActionBtn,
   Text,
+  Row,
+  Col,
 } from '../../components'
-import { SNOW } from '../../constants/colors'
 
 const TableTitle = s.h4`
   padding-top: 1rem;
@@ -24,22 +26,24 @@ const TableHead = s.thead`
 
 export default () => (
   <>
-    <Section background={SNOW}>
+    <BackgroundSection backgroundImage="/static/img/bg-1-01.svg">
       <Container>
-        <Preheading>Mission</Preheading>
-        <Title>Making it easier on your employees</Title>
+        <Row>
+          <Col width="70%">
+            <Preheading white>Mission</Preheading>
+            <Title white>Making it easier on your employees</Title>
 
-        <Text>
-          {'Financial stress is directly correlated with a loss in productivity, with employees spending up to 3 hours a day worrying about their finances.'}
-        </Text>
+            <Text white>
+              {'Financial stress is directly correlated with a loss in productivity, with employees spending up to 3 hours a day worrying about their finances.'}
+            </Text>
 
-        <Text>What SalaryMatch can do for you:</Text>
-
-        <Text>
-          {'We give employees the tools to take control of their finances and make financial stress an issue of the past. Through our innovative credit solutions, we want to help people unlock their full potential and live their best lives.'}
-        </Text>
+            <Text white>
+              {'We give employees the tools to take control of their finances and make financial stress an issue of the past. Through our innovative credit solutions, we want to help people unlock their full potential and live their best lives.'}
+            </Text>
+          </Col>
+        </Row>
       </Container>
-    </Section>
+    </BackgroundSection>
 
     <Section>
       <Container>

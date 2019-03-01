@@ -19,7 +19,7 @@ export default () => (
         <ol>
           <li>The importance of learning how to manage your money properly</li>
           <li>
-            {'The difficulty of accessing reasonably credit without a solid financial background'}
+            {'The difficulty of accessing reasonable credit without a solid financial background'}
           </li>
         </ol>
       </Container>

@@ -1,11 +1,18 @@
 import s from 'styled-components'
 
-import { DARK_GRAY, BLACK, SLATE } from '../constants/colors'
+import {
+  DARK_GRAY,
+  BLACK,
+  SLATE,
+  WHITE,
+} from '../constants/colors'
 
-export const Title = s.h2``
+export const Title = s.h2`
+  color: ${({ white }) => (white ? WHITE : BLACK)};
+`
 
 export const Text = s.p`
-  color: ${DARK_GRAY};
+  color: ${({ white }) => (white ? WHITE : DARK_GRAY)};
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
 `
 
@@ -21,7 +28,7 @@ export const StrongText = s(Text)`
 
 export const Preheading = s.h6`
   margin-bottom: 2.175rem;
-  color: ${SLATE};
+  color: ${({ white }) => (white ? WHITE : SLATE)};
 `
 
 export const Blockquote = s.blockquote`
