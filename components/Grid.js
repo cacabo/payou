@@ -32,6 +32,10 @@ export const Row = styled.div`
   flex-direction: row;
   width: 100%;
 
+  ${({ marginBottom }) => marginBottom && `
+    margin-bottom: ${marginBottom};
+  `}
+
   ${maxWidth(SM)} {
     display: block;
   }

@@ -7,13 +7,12 @@ import { GREEN, WHITE, GREENER } from '../constants/colors'
 
 const styles = `
   background: ${GREEN};
-  padding: 12px 24px;
+  padding: 16px 24px;
   border-radius: 4px;
   color: ${WHITE};
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
-  font-size: 80%;
 
   &:hover {
     background: ${GREENER};

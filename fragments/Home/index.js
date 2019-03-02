@@ -11,7 +11,8 @@ import {
   Title,
   Text,
 } from '../../components'
-import { SNOW } from '../../constants/colors'
+
+import Problem from './Problem'
 import EmployeeLeadModal from './EmployeeLeadModal'
 
 class Home extends Component {
@@ -37,26 +38,8 @@ class Home extends Component {
       <>
         <Hero />
 
-        <Section background={SNOW}>
-          <Container>
-            <Preheading>Mission</Preheading>
-            <Title>The problem</Title>
+        <Problem />
 
-            <Text>
-              Almost 80% of Americans live from paycheck to paycheck
-            </Text>
-            <Text>
-              20% of adults are not able to pay their bills on time
-            </Text>
-            <Text>
-              25% of adults skipped necessary medical care in 2017 because they couldn’t afford it
-            </Text>
-            <Text>
-              <strong>Our mission is simple:</strong>
-              {' We want to help these individuals achieve financial stability by providing them with quick and easy access to reasonably priced loans.'}
-            </Text>
-          </Container>
-        </Section>
         <Section>
           <Container>
             <Preheading>Our company</Preheading>
