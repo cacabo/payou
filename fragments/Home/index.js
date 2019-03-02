@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Process from './Process'
+import Purpose from './Purpose'
 import Hero from './Hero'
 
 import {
@@ -53,21 +54,8 @@ class Home extends Component {
             </ActionBtn>
           </Container>
         </Section>
-        <Section>
-          <Container>
-            <Preheading>Purpose</Preheading>
-            <Title>Make the most of the good moments in life</Title>
 
-            <ul>
-              <li>Take that honeymoon trip you’ve always dreamed of</li>
-              <li>Buy the woman of your life the engagement ring she deserves</li>
-              <li>Take your family on that overdue vacation</li>
-              <li>Improve your home</li>
-              <li>Refinance any debts you have</li>
-              <li>Cover Medical, Auto or Home bills you didn’t see coming</li>
-            </ul>
-          </Container>
-        </Section>
+        <Purpose />
 
         <Process />
 

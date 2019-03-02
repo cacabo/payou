@@ -8,6 +8,8 @@ import {
   maxWidth,
 } from '../constants/widths'
 
+const percent = numCols => `${(numCols / 12 * 100)}%`
+
 export const Container = styled.div`
   width: 100%;
   display: block;
@@ -29,6 +31,7 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
 
@@ -42,8 +45,45 @@ export const Row = styled.div`
 `
 
 export const Col = styled.div`
-  flex: ${({ width }) => (width ? 'none' : '1')};
+  flex: ${({ width }) => (width ? 'none' : 1)};
   width: ${({ width }) => width || 'auto'};
+
+  ${maxWidth(SM)} {
+    ${({ sm }) => sm && `
+      width: ${percent(sm)};
+      flex: none;
+    `}
+
+    ${({ offsetSm }) => offsetSm && `
+      margin-left: ${percent(offsetSm)};
+    `}
+  }
+
+  ${minWidth(MD)} {
+    ${({ md }) => md && `
+      width: ${percent(md)}
+      flex: none;
+    `}
+
+    ${({ offsetMd }) => offsetMd && `
+      margin-left: ${percent(offsetMd)};
+    `}
+  }
+
+  ${minWidth(LG)} {
+    ${({ lg }) => lg && `
+      width: ${percent(lg)}
+      flex: none;
+    `}
+
+    ${({ offsetLg }) => offsetLg && `
+      margin-left: ${percent(offsetLg)};
+    `}
+  }
+
+  ${({ flex }) => flex && (`
+    display: flex;
+  `)}
 `
 
 export const ColSpace = styled(Col)`
