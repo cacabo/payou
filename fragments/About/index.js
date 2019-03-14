@@ -13,7 +13,7 @@ import {
 
 export default () => (
   <>
-    <BackgroundSection backgroundImage="/static/img/bg-2.svg" hero>
+    <BackgroundSection backgroundImage="/static/img/bg-2-blue.svg" hero>
       <Container>
         <Row>
           <Col width="60%">
