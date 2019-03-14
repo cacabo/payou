@@ -18,6 +18,13 @@ export const GREENER = '#58bc76'
 export const FOREST = '#34ad58'
 export const GOBLIN = '#2d8246'
 
+export const SKY = '#d9e7f7'
+export const BLUE_BORDER = 'rgb(32, 88, 155, 0.25)'
+export const BLUE = '#20589b'
+export const BLUER = '#194f8e'
+export const NAVY = '#0a3160'
+export const MIDNIGHT = '#04264f'
+
 // Secondary colors
 export const PURPLE = '#674993'
 

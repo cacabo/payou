@@ -8,7 +8,7 @@ import { Container } from '../../components'
 import {
   WHITE_ALPHA,
   BORDER,
-  GREEN,
+  NAVY,
 } from '../../constants/colors'
 import { MD, maxWidth } from '../../constants/widths'
 import { HOME_ROUTE } from '../../constants/routes'
@@ -47,7 +47,7 @@ const NavSpace = s.div`
 `
 
 const Logo = s.a`
-  color: ${GREEN} !important;
+  color: ${NAVY} !important;
   font-weight: bold;
   text-decoration: none !important;
   display: inline-block;

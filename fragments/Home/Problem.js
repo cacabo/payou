@@ -4,8 +4,8 @@ import s from 'styled-components'
 import {
   SNOW,
   WHITE,
-  MINT,
-  FOREST,
+  SKY,
+  NAVY,
   BORDER,
 } from '../../constants/colors'
 import {
@@ -57,8 +57,8 @@ const StyledCol = s(Col)`
 `
 
 const Number = s.h1`
-  color: ${FOREST};
-  background: ${MINT};
+  color: ${NAVY};
+  background: ${SKY};
   padding: 8px 16px;
   border-radius: 4px;
   margin-bottom: 1rem;

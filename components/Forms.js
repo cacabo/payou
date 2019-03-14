@@ -1,11 +1,11 @@
 import s from 'styled-components'
 
 import {
-  GREEN,
+  BLUE,
   BORDER,
   BLACK,
   WHITE,
-  MINT,
+  SKY,
 } from '../constants/colors'
 import { BtnInput } from './Btn'
 
@@ -26,12 +26,12 @@ const styles = `
 
   &:active,
   &:focus {
-    border-color: ${GREEN} !important;
+    border-color: ${BLUE} !important;
   }
 
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem ${MINT};
+    box-shadow: 0 0 0 0.2rem ${SKY};
   }
 `
 

@@ -5,12 +5,17 @@ import s from 'styled-components'
 import { Container, Section } from '../components'
 import {
   SNOW,
-  GREEN,
+  NAVY,
   DARK_GRAY,
   SLATE,
   DARK_SLATE,
 } from '../constants/colors'
-import { HOME_ROUTE, EMPLOYERS_ROUTE, ABOUT_ROUTE } from '../constants/routes'
+import {
+  HOME_ROUTE,
+  EMPLOYERS_ROUTE,
+  ABOUT_ROUTE,
+  PRIVACY_ROUTE,
+} from '../constants/routes'
 
 const FooterWrapper = s.div`
   width: 100%;
@@ -23,10 +28,11 @@ const FooterWrapper = s.div`
 `
 
 const Logo = s.h4`
-  color: ${GREEN};
+  color: ${NAVY};
 `
 
 const Legal = s.p`
+  padding-top: 1rem;
   font-size: 80%;
   color: ${DARK_GRAY};
 `
@@ -60,6 +66,10 @@ const links = [
   {
     route: ABOUT_ROUTE,
     text: 'About us',
+  },
+  {
+    route: PRIVACY_ROUTE,
+    text: 'Privacy',
   },
 ]
 

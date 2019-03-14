@@ -8,7 +8,7 @@ import {
   StrongText,
   Text,
 } from './index'
-import { MINT, FOREST, WHITE_ALPHA } from '../constants/colors'
+import { SKY, NAVY, WHITE_ALPHA } from '../constants/colors'
 
 const Wrapper = s.div`
   p {
@@ -19,9 +19,9 @@ const Wrapper = s.div`
 const NumberCircle = s.div`
   width: 2.5rem;
   height: 2.5rem;
-  background: ${({ white }) => (white ? WHITE_ALPHA(0.4) : MINT)};
+  background: ${({ white }) => (white ? WHITE_ALPHA(0.4) : SKY)};
   border-radius: 50%;
-  color: ${({ white }) => (white ? WHITE_ALPHA(0.9) : FOREST)};
+  color: ${({ white }) => (white ? WHITE_ALPHA(0.9) : NAVY)};
   font-weight: bold;
   font-size: 1.5rem;
   text-align: center;

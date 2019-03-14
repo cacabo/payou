@@ -3,10 +3,10 @@ import s from 'styled-components'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
-import { GREEN, WHITE, GREENER } from '../constants/colors'
+import { NAVY, WHITE, MIDNIGHT } from '../constants/colors'
 
 const styles = `
-  background: ${GREEN};
+  background: ${NAVY};
   padding: 16px 24px;
   border-radius: 4px;
   color: ${WHITE};
@@ -15,7 +15,7 @@ const styles = `
   font-weight: bold;
 
   &:hover {
-    background: ${GREENER};
+    background: ${MIDNIGHT};
   }
 
   &:hover,

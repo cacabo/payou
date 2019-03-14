@@ -17,6 +17,10 @@ const TableTitle = s.h4`
   text-align: center;
 `
 
+const Table = s.table`
+  padding-top: 1rem;
+`
+
 const TableHead = s.thead`
   th {
     font-weight: 600;
@@ -75,7 +79,7 @@ class Employers extends Component {
             </Text>
 
             <TableTitle>Estimates of Turnover Costs</TableTitle>
-            <table>
+            <Table>
               <TableHead>
                 <tr>
                   {[
@@ -111,7 +115,7 @@ class Employers extends Component {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           </Container>
         </Section>
 
@@ -123,6 +127,10 @@ class Employers extends Component {
             <Text>
               {'Financial stress is directly correlated with a loss in productivity, with employees spending up to 3 hours a day worrying about their finances. Through our credit solutions to address financial stress, we help firms see a real increase in productivity, and studies have shown that individuals enrolled in salary deducted loans in the United Kingdom increased a company\'s retention rate by 28%, translating into significant cost savings with hiring, loss of productivity associated with experienced employees leaving, and training'}
             </Text>
+
+            <ActionBtn handleClick={this.toggleModal}>
+              Sounds good?
+            </ActionBtn>
           </Container>
         </Section>
 
