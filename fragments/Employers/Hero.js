@@ -10,11 +10,11 @@ import {
 } from '../../components'
 
 export default () => (
-  <BackgroundSection backgroundImage="/static/img/bg-1-01.svg" hero>
+  <BackgroundSection backgroundImage="/static/img/bg-1-01.svg" hero marginBottom="-3rem">
     <Container>
       <Row>
         <Col width="70%">
-          <Title white>Making it easier on your employees</Title>
+          <Title big white>Empowering your employees</Title>
 
           <Text white>
             {'Financial stress is directly correlated with a loss in productivity, with employees spending up to 3 hours a day worrying about their finances.'}

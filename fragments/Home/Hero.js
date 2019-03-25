@@ -11,11 +11,15 @@ import {
 } from '../../components'
 
 const Wrapper = s.div`
-  padding-top: 20vh;
-  padding-bottom: 10vh;
-  min-height: calc(100vh - 80px);
+  padding-top: 22.5vh;
+  padding-bottom: 15vh;
   font-size: 120%;
   line-height: 1.25;
+  background-image: url('/static/img/people.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: -3rem;
 `
 
 export default () => (
@@ -24,10 +28,10 @@ export default () => (
       <Container>
         <Row>
           <Col width="75%">
-            <Title>
+            <Title big white>
               {'Easy, quick, affordable loans'}
             </Title>
-            <Text>
+            <Text big white>
               We want to help you move from debt to savings through affordable salary-deducted loans
             </Text>
           </Col>

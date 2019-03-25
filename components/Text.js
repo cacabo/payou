@@ -10,16 +10,19 @@ import {
 
 export const Title = s.h2`
   color: ${({ white }) => (white ? WHITE : BLACK)};
+  ${({ big }) => big && 'font-size: 200%;'}
+  margin-bottom: 1.5rem;
 `
 
 export const Text = s.p`
   color: ${({ white }) => (white ? WHITE : DARK_GRAY)};
+  ${({ big }) => big && 'font-size: 125%;'}
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
 `
 
 export const MediumText = s(Text)`
   color: ${BLACK};
-  font-weight: 600;
+  font-weight: 500;
 `
 
 export const StrongText = s(Text)`
@@ -29,6 +32,7 @@ export const StrongText = s(Text)`
 
 export const Preheading = s.h4`
   margin-bottom: 2.675rem;
+  font-weight: 500;
   color: ${({ white }) => (white ? WHITE_ALPHA(0.8) : SLATE)};
 `
 

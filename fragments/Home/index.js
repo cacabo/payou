@@ -5,6 +5,7 @@ import Purpose from './Purpose'
 import Hero from './Hero'
 import Solution from './Solution'
 import Problem from './Problem'
+import Comparison from './Comparison'
 import EmployeeLeadModal from './EmployeeLeadModal'
 
 import {
@@ -40,6 +41,8 @@ class Home extends Component {
         <Hero />
 
         <Solution />
+
+        <Comparison />
 
         <Purpose />
 

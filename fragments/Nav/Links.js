@@ -17,9 +17,9 @@ const Links = s.div`
     display: inline-block;
     width: auto;
     margin: 0;
-    margin-left: 1.5rem;
-    font-size: 80%;
-    font-weight: bold;
+    margin-left: 3rem;
+    font-size: 1rem;
+    font-weight: 500;
     text-decoration: none !important;
 
     &:hover {
@@ -52,10 +52,10 @@ const Links = s.div`
 const LinksComponent = ({ active }) => (
   <Links active={active}>
     <Link href={HOME_ROUTE}>
-      <a>For employees</a>
+      <a>Employees</a>
     </Link>
     <Link href={EMPLOYERS_ROUTE}>
-      <a>For employers</a>
+      <a>Employers</a>
     </Link>
     <Link href={ABOUT_ROUTE}>
       <a>About</a>

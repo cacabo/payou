@@ -7,6 +7,7 @@ import {
   Preheading,
   Title,
   ActionBtn,
+  ShiftWrapper,
   Text,
 } from '../../components'
 import Hero from './Hero'
@@ -23,7 +24,7 @@ const Table = s.table`
 
 const TableHead = s.thead`
   th {
-    font-weight: 600;
+    font-weight: 500;
   }
 `
 
@@ -50,29 +51,31 @@ class Employers extends Component {
       <>
         <Hero />
 
-        <Section>
+        <Section paddingTop="0">
           <Container>
-            <Preheading>Why us?</Preheading>
-            <Title>Risk-free, Cost-free, Stress-free</Title>
+            <ShiftWrapper>
+              <Preheading>Why us?</Preheading>
+              <Title>Risk-free, Cost-free, Stress-free</Title>
 
-            <Text>
-              {'Employers can offer Payou to their employees at no cost at all. Our solution is designed to seamlessly integrate with your firm by taking full responsibility of the loan process and offering your employees the benefits they deserve.'}
-            </Text>
+              <Text>
+                {'Employers can offer Payou to their employees at no cost at all. Our solution is designed to seamlessly integrate with your firm by taking full responsibility of the loan process and offering your employees the benefits they deserve.'}
+              </Text>
 
-            <Text>
-              {'We integrate within hours with the software you already use and our model does not interfere with your taxes.'}
-            </Text>
+              <Text>
+                {'We integrate within hours with the software you already use and our model does not interfere with your taxes.'}
+              </Text>
 
-            <ActionBtn handleClick={this.toggleModal}>
-              Get in touch
-            </ActionBtn>
+              <ActionBtn handleClick={this.toggleModal}>
+                Get in touch
+              </ActionBtn>
+            </ShiftWrapper>
           </Container>
         </Section>
 
         <Section>
           <Container>
             <Preheading>Time is money</Preheading>
-            <Title>Increase in Retention Rate</Title>
+            <Title>Increase in retention rate</Title>
 
             <Text>
               {'High turnover is a major source of financial costs for employers. When employees leaves a firm, a company loses the investment it has made in training, recruiting and hiring, as well as a loss of productivity associated with experienced workers. They must also incur significant costs with hiring, training and errors committed by new employees.'}
