@@ -5,7 +5,6 @@ import s from 'styled-components'
 import { Container, Section } from '../components'
 import {
   SNOW,
-  NAVY,
   DARK_GRAY,
   SLATE,
   DARK_SLATE,
@@ -27,8 +26,8 @@ const FooterWrapper = s.div`
   }
 `
 
-const Logo = s.h4`
-  color: ${NAVY};
+const Logo = s.img`
+  height: 26px;
 `
 
 const Legal = s.p`
@@ -77,7 +76,7 @@ export default () => (
   <FooterWrapper>
     <Section>
       <Container>
-        <Logo>SalaryMatch</Logo>
+        <Logo src="/static/img/logo.svg" alt="Payou logo" />
         <Links>
           {links.map(({ route, text }) => (
             <div key={`${route}-${text}`}>
@@ -90,7 +89,7 @@ export default () => (
           ))}
         </Links>
         <Legal>
-          salary-match.com &copy; 2019, all rights reserved.
+          Payou &copy; 2019, all rights reserved.
         </Legal>
       </Container>
     </Section>

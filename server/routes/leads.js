@@ -17,7 +17,7 @@ const composeEmail = (formName, params, email, message) => {
   return {
     to: EMAIL,
     from: email,
-    subject: `SalaryMatch ${formName} form submission`,
+    subject: `Payou ${formName} form submission`,
     text: `${paramsStr}\n\n${message}`,
     html: `
       ${paramsHTML}

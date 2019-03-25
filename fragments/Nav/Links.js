@@ -39,7 +39,7 @@ const Links = s.div`
 
     a {
       :first-child {
-        margin-top: 1.5rem;
+        margin-top: 3rem;
       }
 
       display: block;

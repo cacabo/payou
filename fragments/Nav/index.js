@@ -7,22 +7,24 @@ import Bars from './Bars'
 import { Container } from '../../components'
 import {
   WHITE_ALPHA,
+  WHITE,
   BORDER,
-  NAVY,
 } from '../../constants/colors'
 import { MD, maxWidth } from '../../constants/widths'
 import { HOME_ROUTE } from '../../constants/routes'
 
 const Z_INDEX = 1300
 const NAV_HEIGHT = '63px'
+const INNER_HEIGHT = '26px'
 
 const NavWrapper = s.nav`
   width: 100%;
-  background: ${WHITE_ALPHA(0.95)};
+  background: ${({ active }) => (active ? WHITE : WHITE_ALPHA(0.95))};
   border-bottom: 1px solid ${BORDER};
   padding: 1rem 0;
   position: fixed;
   z-index: 1300;
+  min-height: ${NAV_HEIGHT};
 `
 
 const Shade = s.div`
@@ -46,13 +48,13 @@ const NavSpace = s.div`
   height: ${NAV_HEIGHT};
 `
 
-const Logo = s.a`
-  color: ${NAVY} !important;
-  font-weight: bold;
+const Logo = s.img`
   text-decoration: none !important;
   display: inline-block;
+  position: absolute;
   margin-bottom: 0;
   cursor: pointer;
+  height: ${INNER_HEIGHT};
 `
 
 class Nav extends Component {
@@ -72,10 +74,10 @@ class Nav extends Component {
 
     return (
       <>
-        <NavWrapper>
+        <NavWrapper active={active}>
           <Container>
             <Link href={HOME_ROUTE}>
-              <Logo>SalaryMatch</Logo>
+              <Logo src="/static/img/logo.svg" alt="Payou logo" />
             </Link>
             <Bars active={active} onClick={this.toggle} />
             <Links active={active} />

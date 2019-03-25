@@ -56,7 +56,7 @@ class Employers extends Component {
             <Title>Risk-free, Cost-free, Stress-free</Title>
 
             <Text>
-              {'Employers can offer SalaryMatch to their employees at no cost at all. Our solution is designed to seamlessly integrate with your firm by taking full responsibility of the loan process and offering your employees the benefits they deserve.'}
+              {'Employers can offer Payou to their employees at no cost at all. Our solution is designed to seamlessly integrate with your firm by taking full responsibility of the loan process and offering your employees the benefits they deserve.'}
             </Text>
 
             <Text>
