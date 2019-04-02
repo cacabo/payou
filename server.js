@@ -56,6 +56,8 @@ app.prepare()
       handle(req, res)
     ))
 
+    // TODO 404?
+
     server.listen(port, (err) => {
       if (err) throw err
       console.log(`> Ready on http://localhost:${port}`) // eslint-disable-line

@@ -1,6 +1,8 @@
 import React from 'react'
 import s from 'styled-components'
 
+import routes from '../../constants/routes'
+
 import {
   Container,
   Section,
@@ -8,6 +10,7 @@ import {
   Text,
   Row,
   Col,
+  Btn,
 } from '../../components'
 
 const Wrapper = s.div`
@@ -34,6 +37,9 @@ export default () => (
             <Text big white>
               We want to help you move from debt to savings through affordable salary-deducted loans
             </Text>
+            <Btn href={routes.NEW_APPLICATION_ROUTE}>
+              Get in touch
+            </Btn>
           </Col>
         </Row>
       </Container>
