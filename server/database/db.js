@@ -1,10 +1,13 @@
-// const bcrypt = require('bcrypt')
-
+const bcrypt = require('bcrypt')
 require('./mongooseConnect')
+
 
 const EmployerLead = require('./models/EmployerLead')
 const EmployeeLead = require('./models/EmployeeLead')
 const Employee = require('./models/Employee')
+
+
+const { SALT_ROUNDS } = process.env
 
 
 function getEmployee(id) {
@@ -34,21 +37,41 @@ function execEmployeeAppStep2({
   dateOfBirth,
   phone,
 }) {
-  const e = getEmployee(_id)
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
 
-  const { day, month, year } = dateOfBirth
-  if (!day || !month || !year) {
-    throw new Error('Day, month, and year are required for date of birth')
-  }
+      if (
+        !firstName
+        || !lastName
+        || !dateOfBirth
+        || !phone
+      ) {
+        throw new Error('Please fill in all fields')
+      }
 
-  e.firstName = firstName
-  e.lastName = lastName
-  e.suffix = suffix
-  e.dateOfBirth = { day, month, year }
-  e.phone = phone
-  e.step = 3
+      const { day, month, year } = dateOfBirth
+      if (!day || !month || !year) {
+        throw new Error('Day, month, and year are required for date of birth')
+      }
 
-  return e.save()
+      e.firstName = firstName
+      e.lastName = lastName
+      e.suffix = suffix
+      e.dateOfBirth = { day, month, year }
+      e.phone = phone
+
+      if (e.step === 2) {
+        e.step = 3
+      }
+
+      e.save()
+        .then(resolve)
+        .catch(reject)
+    } catch (e) {
+      reject(e)
+    }
+  })
 }
 
 
@@ -61,25 +84,242 @@ function execEmployeeAppStep3({
   subscribeToNews,
   agreeToTerms,
 }) {
-  const e = getEmployee(_id)
-  if (email !== confirmEmail) {
-    throw new Error('Email and confirm email must match')
-  }
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
 
-  if (password !== confirmPassword) {
-    throw new Error('Password and confirm password must match')
-  }
+      if (e.step < 3) {
+        throw new Error('You must complete other steps before this one')
+      }
 
-  // TODO hash password
+      if (
+        !email
+        || !confirmEmail
+        || !password
+        || !confirmPassword
+      ) {
+        throw new Error('Missing fields')
+      }
 
-  e.email = email
-  e.password = password
-  e.subscribeToNews = subscribeToNews
-  e.agreeToTerms = agreeToTerms
+      if (email !== confirmEmail) {
+        throw new Error('Email and confirm email must match')
+      }
 
-  e.step = 4
+      if (password !== confirmPassword) {
+        throw new Error('Password and confirm password must match')
+      }
 
-  return e.save()
+      if (password.length() < 5) {
+        throw new Error('Password must be at least 5 characters')
+      }
+
+      bcrypt.hash(password, SALT_ROUNDS, (err, hash) => {
+        if (err) {
+          return reject(err)
+        }
+
+        e.email = email
+        e.password = hash
+        e.subscribeToNews = subscribeToNews
+        e.agreeToTerms = agreeToTerms
+
+        if (e.step === 3) {
+          e.step = 4
+        }
+
+        return e.save()
+          .then(resolve)
+          .catch(reject)
+      })
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+
+function execEmployeeAppStep4({
+  _id,
+  payrollId,
+  grossAnnualIncome,
+  otherIncome,
+  employmentStartDate,
+  paycycle,
+}) {
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
+
+      if (e.step < 4) {
+        throw new Error('Please complete earlier steps')
+      }
+
+      if (
+        !payrollId
+        || !grossAnnualIncome
+        || !otherIncome
+        || !employmentStartDate
+        || !paycycle
+      ) {
+        throw new Error('Please fill in all fields')
+      }
+
+      const { month, year } = employmentStartDate
+      if (!month || !year) {
+        throw new Error('Include start month and year')
+      }
+
+      e.payrollId = payrollId
+      e.grossAnnualIncome = grossAnnualIncome
+      e.otherIncome = otherIncome
+      e.employmentStartDate = employmentStartDate
+      e.paycycle = paycycle
+
+      if (e.step === 4) {
+        e.step = 5
+      }
+
+      e.save()
+        .then(resolve)
+        .catch(reject)
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+
+function execEmployeeAppStep5({
+  _id,
+  address,
+  timeAtAddress,
+  residentialStatus,
+  residentialStatusExplanation,
+}) {
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
+
+      if (e.step < 5) {
+        throw new Error('Please complete earlier steps')
+      }
+
+      if (
+        !address
+        || timeAtAddress === undefined
+        || timeAtAddress === null
+        || !residentialStatus
+      ) {
+        throw new Error('Please fill in all fields')
+      }
+
+      const {
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+      } = address
+
+      if (
+        !address1
+        || !city
+        || !state
+        || !zip
+      ) {
+        throw new Error('Please enter a valid address')
+      }
+
+      e.address = {
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+      }
+      e.timeAtAddress = timeAtAddress
+      e.residentialStatus = residentialStatus
+      e.residentialStatusExplanation = residentialStatusExplanation
+
+      if (e.step === 5) {
+        e.step = 6
+      }
+
+      e.save()
+        .then(resolve)
+        .catch(reject)
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+
+function execEmployeeAppStep6({
+  _id,
+  ssn,
+  numberOfFinancialDependents,
+  civilStatus,
+  expectsChangesToEmploymentStatus,
+}) {
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
+
+      if (e.step < 6) {
+        throw new Error('Please complete prior steps')
+      }
+
+      if (!ssn
+        || numberOfFinancialDependents === null
+        || numberOfFinancialDependents === undefined
+        || !civilStatus
+      ) {
+        throw new Error('Please fill out all fields')
+      }
+
+      e.ssn = ssn
+      e.numberOfFinancialDependents = numberOfFinancialDependents
+      e.civilStatus = civilStatus
+      e.expectsChangesToEmploymentStatus = expectsChangesToEmploymentStatus
+
+      if (e.step === 6) {
+        e.step = 7
+      }
+
+      e.save()
+        .then(resolve)
+        .catch(reject)
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+
+function execEmployeeAppStep7({
+  _id,
+}) {
+  return new Promise((resolve, reject) => {
+    try {
+      const e = getEmployee(_id)
+
+      if (e.step < 7) {
+        throw new Error('Please complete all steps before this')
+      }
+
+      e.step = 8
+      e.applied = true
+
+      // TODO trigger other actions?
+
+      e.save
+        .then(resolve)
+        .catch(reject)
+    } catch (e) {
+      reject(e)
+    }
+  })
 }
 
 
@@ -128,4 +368,8 @@ module.exports = {
   execEmployeeAppStep1,
   execEmployeeAppStep2,
   execEmployeeAppStep3,
+  execEmployeeAppStep4,
+  execEmployeeAppStep5,
+  execEmployeeAppStep6,
+  execEmployeeAppStep7,
 }
