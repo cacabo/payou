@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
+// TODO full time or part time
+
 const EmployeeSchema = new Schema({
   // General
   step: {

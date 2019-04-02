@@ -4,29 +4,38 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const sgMail = require('@sendgrid/mail')
 
+
 const routes = require('./constants/routes')
+const applicationsRouter = require('./server/routes/applications')
 const leadsRouter = require('./server/routes/leads')
 
+
 const DB = require('./server/database/db')
+
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+
 const { SENDGRID_API_KEY, EMAIL } = process.env
+
 
 if (!SENDGRID_API_KEY) {
   console.log('Missing SENDGRID_API_KEY') // eslint-disable-line
   process.exit(1)
 }
 
+
 if (!EMAIL) {
   console.log('Missing EMAIL') // eslint-disable-line
   process.exit(1)
 }
 
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 
 app.prepare()
   .then(() => {
@@ -36,6 +45,7 @@ app.prepare()
     server.use(bodyParser.json())
     server.use(express.static(path.join(__dirname, 'public')))
 
+    server.use('/api/applications', applicationsRouter(DB))
     server.use('/api/leads', leadsRouter(DB))
 
     server.get(routes.HOME_ROUTE, (req, res) => (
