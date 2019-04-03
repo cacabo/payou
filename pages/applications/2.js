@@ -5,6 +5,6 @@ import Application from '../../fragments/Application/index'
 
 export default () => (
   <Layout>
-    <Application step={0} />
+    <Application step={2} />
   </Layout>
 )

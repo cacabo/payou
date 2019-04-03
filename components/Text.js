@@ -12,12 +12,17 @@ export const Title = s.h2`
   color: ${({ white }) => (white ? WHITE : BLACK)};
   ${({ big }) => big && 'font-size: 200%;'}
   margin-bottom: 1.5rem;
+  font-weight: 500;
 `
 
 export const Text = s.p`
   color: ${({ white }) => (white ? WHITE : DARK_GRAY)};
   ${({ big }) => big && 'font-size: 125%;'}
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
+`
+
+export const TextList = s.ul`
+  color: ${({ white }) => (white ? WHITE : DARK_GRAY)};
 `
 
 export const MediumText = s(Text)`

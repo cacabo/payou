@@ -8,6 +8,7 @@ import {
   DARK_GRAY,
   SLATE,
   DARK_SLATE,
+  BORDER,
 } from '../constants/colors'
 import {
   HOME_ROUTE,
@@ -20,6 +21,7 @@ const FooterWrapper = s.div`
   width: 100%;
   padding: 1rem 0;
   background: ${SNOW};
+  border-top: 1px solid ${BORDER};
 
   p {
     margin-bottom: 0;

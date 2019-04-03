@@ -38,7 +38,7 @@ export default () => (
               We want to help you move from debt to savings through affordable salary-deducted loans
             </Text>
             <Btn href={routes.NEW_APPLICATION_ROUTE}>
-              Get in touch
+              Apply today
             </Btn>
           </Col>
         </Row>
