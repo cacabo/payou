@@ -12,8 +12,6 @@ import {
 } from '../../components'
 import { applicationRoute } from '../../constants/routes'
 
-// residentialStatus
-// residentialStatusExplanation
 
 export default () => {
   const stateOptions = []
@@ -37,7 +35,7 @@ export default () => {
         <Input smallLabel label="Explain" name="residentialStatusExplanation" type="text" />
       </form>
       <Btn href={applicationRoute(6)} fullWidth>
-        Submit
+        Next
       </Btn>
     </FormWrapper>
   )

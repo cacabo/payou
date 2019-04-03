@@ -55,7 +55,7 @@ export default () => {
         <Input type="tel" label="Cell phone number" name="phone" placeholder="(123) 456-7890" />
       </form>
       <Btn href={applicationRoute(3)} fullWidth>
-        Submit
+        Next
       </Btn>
     </FormWrapper>
   )

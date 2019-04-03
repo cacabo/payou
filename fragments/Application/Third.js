@@ -20,7 +20,7 @@ export default () => (
       <Checkbox label="Agree to terms and conditions" name="agreeToTerms" />
     </form>
     <Btn href={applicationRoute(4)} fullWidth>
-      Submit
+      Next
     </Btn>
   </FormWrapper>
 )

@@ -49,7 +49,7 @@ export default () => {
         <Select label="Paycycle (weeks)" name="paycycle" options={paycycleOptions} />
       </form>
       <Btn href={applicationRoute(5)} fullWidth>
-        Submit
+        Next
       </Btn>
     </FormWrapper>
   )

@@ -29,7 +29,7 @@ export default () => {
         <Select label="Term Length" name="term" options={termOptions} />
       </form>
       <Btn href={applicationRoute(2)} fullWidth>
-        Submit
+        Next
       </Btn>
     </FormWrapper>
   )
