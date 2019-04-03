@@ -11,7 +11,7 @@ import {
   SLATE,
   GRAY,
 } from '../constants/colors'
-import { minWidth, MD } from '../constants/widths'
+import { minWidth, MD, LG } from '../constants/widths'
 import {
   SnowBackground,
   Container,
@@ -72,7 +72,7 @@ export const Select = ({
     {label && <Label htmlFor={name} small={smallLabel}>{label}</Label>}
     <SelectTag id={name} name={name}>
       {options.map(({ value, text }) => (
-        <option value={value} key={value}>
+        <option value={value} key={value || text}>
           {text}
         </option>
       ))}
@@ -119,18 +119,25 @@ Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export const Input = ({ label, name, ...other }) => (
+export const Input = ({
+  label,
+  name,
+  smallLabel,
+  ...other
+}) => (
   <>
-    {label && (<Label>{label}</Label>)}
+    {label && (<Label small={smallLabel} htmlFor={name}>{label}</Label>)}
     <InputTag name={name} id={name} {...other} />
   </>
 )
 
 Input.defaultProps = {
+  smallLabel: false,
   label: null,
 }
 
 Input.propTypes = {
+  smallLabel: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
 }
@@ -153,6 +160,11 @@ const StyledContainer = s(Container)`
   ${minWidth(MD)} {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
+  }
+
+  ${minWidth(LG)} {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
   }
 `
 

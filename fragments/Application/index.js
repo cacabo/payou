@@ -8,9 +8,13 @@ import {
   Text,
   Btn,
 } from '../../components'
+
 import First from './First'
 import Second from './Second'
 import Third from './Third'
+import Fourth from './Fourth'
+import Fifth from './Fifth'
+
 import { applicationRoute } from '../../constants/routes'
 
 const Application = ({ step }) => {
@@ -38,6 +42,10 @@ const Application = ({ step }) => {
     case 2: return (<Second />)
 
     case 3: return (<Third />)
+
+    case 4: return (<Fourth />)
+
+    case 5: return (<Fifth />)
 
     default:
       return null // TODO 404

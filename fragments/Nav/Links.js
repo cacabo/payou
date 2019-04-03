@@ -19,7 +19,7 @@ const Links = s.div`
     margin: 0;
     margin-left: 3rem;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none !important;
 
     &:hover {

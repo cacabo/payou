@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
+const states = require('../../../constants/states')
+const residentialStatusOptions = require('../../../constants/residentialStatusOptions')
+
 // TODO full time or part time
 
 const EmployeeSchema = new Schema({
@@ -156,7 +159,7 @@ const EmployeeSchema = new Schema({
       minLength: 2,
       maxLength: 2,
       validate: {
-        validator: v => ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'].includes(v),
+        validator: v => states.includes(v),
         message: props => `${props.value} is not a valid state`,
       },
     },
@@ -175,14 +178,7 @@ const EmployeeSchema = new Schema({
   },
   residentialStatus: {
     type: String,
-    enum: [
-      'Owner with mortgage',
-      'Owner no mortgage',
-      'Renting',
-      'Living with parents',
-      'Government housing',
-      'Other',
-    ],
+    enum: residentialStatusOptions,
   },
   residentialStatusExplanation: {
     type: String,

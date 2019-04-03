@@ -483,9 +483,9 @@ hr {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: calc(1.45rem - 1px);
-  background: hsla(0, 0%, 0%, 0.2);
+  background: hsla(0, 0%, 0%, 0.1);
   border: none;
-  height: 1px;
+  height: 3px;
 }
 address {
   margin-left: 0;
