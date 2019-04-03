@@ -58,8 +58,7 @@ const SelectTag = s.select`
 export const Label = s.label`
   color: ${SLATE};
   margin-bottom: 0.5rem;
-  display: block;
-
+  display: ${({ inline }) => (inline ? 'inline-block' : 'block')};
   ${({ small }) => small && 'font-size: 80%;'}
 `
 
@@ -99,6 +98,26 @@ Select.propTypes = {
 const InputTag = s.input`
   ${styles}
 `
+
+const CheckboxLabel = s(Label)`
+  margin-left: 0.5rem;
+  transform: translateY(0.1rem);
+`
+
+export const Checkbox = ({ label, name }) => (
+  <>
+    <input type="checkbox" name={name} id={name} />
+    <CheckboxLabel inline htmlFor={name}>
+      {label}
+    </CheckboxLabel>
+    <br />
+  </>
+)
+
+Checkbox.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+}
 
 export const Input = ({ label, name, ...other }) => (
   <>
