@@ -58,9 +58,7 @@ class Second extends Component {
   }
 
   componentDidMount() {
-    const id = getAppId()
-
-    if (!id) {
+    if (!getAppId()) {
       Router.push(NEW_APPLICATION_ROUTE)
     }
   }

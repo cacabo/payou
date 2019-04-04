@@ -8,6 +8,7 @@ const Employee = require('./models/Employee')
 
 
 const { SALT_ROUNDS } = process.env
+const saltRounds = parseInt(SALT_ROUNDS, 10)
 
 
 async function getEmployee(id) {
@@ -38,19 +39,8 @@ function execEmployeeAppStep2({
   dateOfBirth,
   phone,
 }) {
-  console.log('BODY', {
-    id,
-    firstName,
-    lastName,
-    suffix,
-    dateOfBirth,
-    phone,
-  })
-
   return new Promise((resolve, reject) => {
     getEmployee(id).then((e) => {
-      console.log('employee', e)
-
       if (
         !firstName
         || !lastName
@@ -87,62 +77,53 @@ function execEmployeeAppStep2({
 function execEmployeeAppStep3({
   id,
   email,
-  confirmEmail,
   password,
   confirmPassword,
   subscribeToNews,
   agreeToTerms,
 }) {
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(id)
-
+    getEmployee(id).then((e) => {
       if (e.step < 3) {
         throw new Error('You must complete other steps before this one')
       }
 
       if (
         !email
-        || !confirmEmail
         || !password
         || !confirmPassword
       ) {
-        throw new Error('Missing fields')
-      }
-
-      if (email !== confirmEmail) {
-        throw new Error('Email and confirm email must match')
+        throw new Error('Please fill in all fields')
       }
 
       if (password !== confirmPassword) {
         throw new Error('Password and confirm password must match')
       }
 
-      if (password.length() < 5) {
-        throw new Error('Password must be at least 5 characters')
+      if (password.length < 5) {
+        throw new Error('Password must be at least 5 characters long')
       }
 
-      bcrypt.hash(password, SALT_ROUNDS, (err, hash) => {
-        if (err) {
-          return reject(err)
-        }
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        if (err) return reject(err)
+        return bcrypt.hash(password, salt, (hashErr, hash) => {
+          if (hashErr) return reject(hashErr)
 
-        e.email = email
-        e.password = hash
-        e.subscribeToNews = subscribeToNews
-        e.agreeToTerms = agreeToTerms
+          e.email = email
+          e.password = hash
+          e.subscribeToNews = subscribeToNews
+          e.agreeToTerms = agreeToTerms
 
-        if (e.step === 3) {
-          e.step = 4
-        }
+          if (e.step === 3) {
+            e.step = 4
+          }
 
-        return e.save()
-          .then(resolve)
-          .catch(reject)
+          return e.save()
+            .then(resolve)
+            .catch(reject)
+        })
       })
-    } catch (e) {
-      reject(e)
-    }
+    }).catch(reject)
   })
 }
 
@@ -156,9 +137,7 @@ function execEmployeeAppStep4({
   paycycle,
 }) {
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(id)
-
+    getEmployee(id).then((e) => {
       if (e.step < 4) {
         throw new Error('Please complete earlier steps')
       }
@@ -191,9 +170,7 @@ function execEmployeeAppStep4({
       e.save()
         .then(resolve)
         .catch(reject)
-    } catch (e) {
-      reject(e)
-    }
+    }).catch(reject)
   })
 }
 
@@ -206,9 +183,7 @@ function execEmployeeAppStep5({
   residentialStatusExplanation,
 }) {
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(id)
-
+    getEmployee(id).then((e) => {
       if (e.step < 5) {
         throw new Error('Please complete earlier steps')
       }
@@ -257,9 +232,7 @@ function execEmployeeAppStep5({
       e.save()
         .then(resolve)
         .catch(reject)
-    } catch (e) {
-      reject(e)
-    }
+    }).catch(reject)
   })
 }
 
@@ -272,9 +245,7 @@ function execEmployeeAppStep6({
   expectsChangesToEmploymentStatus,
 }) {
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(id)
-
+    getEmployee(id).then((e) => {
       if (e.step < 6) {
         throw new Error('Please complete prior steps')
       }
@@ -299,20 +270,14 @@ function execEmployeeAppStep6({
       e.save()
         .then(resolve)
         .catch(reject)
-    } catch (e) {
-      reject(e)
-    }
+    }).catch(reject)
   })
 }
 
 
-function execEmployeeAppStep7({
-  id,
-}) {
+function execEmployeeAppStep7({ id }) {
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(id)
-
+    getEmployee(id).then((e) => {
       if (e.step < 7) {
         throw new Error('Please complete all steps before this')
       }
@@ -325,9 +290,7 @@ function execEmployeeAppStep7({
       e.save
         .then(resolve)
         .catch(reject)
-    } catch (e) {
-      reject(e)
-    }
+    }).catch(reject)
   })
 }
 

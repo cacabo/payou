@@ -28,14 +28,14 @@ const Wrapper = s.div`
 
 const ErrorWrapper = s(Wrapper)`
   background: ${PINK};
-  color: ${RED};
+  color: ${RED} !important;
   border-color: ${RED_BORDER};
 `
 
 const SuccessWrapper = s(Wrapper)`
   background: ${MINT};
-  color: ${GREEN_BORDER};
-  border-color: ${GREENER};
+  color: ${GREENER} !important;
+  border-color: ${GREEN_BORDER};
 `
 
 export const ErrorMessage = ({ message = '' }) => {

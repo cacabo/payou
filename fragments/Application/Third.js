@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
+import fetch from 'unfetch'
+import Router from 'next/router'
 
 import {
   FormWrapper,
   Title,
   Checkbox,
   Input,
-  Btn,
+  BtnInput,
+  ErrorMessage,
 } from '../../components'
-import { applicationRoute } from '../../constants/routes'
+import { getAppId } from '../../store'
+import {
+  NEW_APPLICATION_ROUTE,
+  postApplicationRoute,
+  applicationRoute,
+} from '../../constants/routes'
+import { DEFAULT_ERROR } from '../../constants/text'
 
 class Third extends Component {
   constructor(props) {
@@ -19,10 +28,19 @@ class Third extends Component {
       confirmPassword: '',
       subscribeToNews: false,
       agreeToTerms: false,
+      error: '',
+      pending: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    if (!getAppId()) {
+      Router.push(NEW_APPLICATION_ROUTE)
+    }
   }
 
   handleChange(event) {
@@ -40,6 +58,7 @@ class Third extends Component {
       password,
       confirmPassword,
       agreeToTerms,
+      pending,
     } = this.state
 
     return !(
@@ -47,7 +66,57 @@ class Third extends Component {
       && password
       && confirmPassword
       && agreeToTerms
+      && !pending
     )
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    if (this.isDisabled()) return
+
+    this.setState({ pending: true })
+
+    const {
+      email,
+      password,
+      confirmPassword,
+      subscribeToNews,
+      agreeToTerms,
+    } = this.state
+    const id = getAppId()
+
+    fetch(postApplicationRoute(3), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        email,
+        password,
+        confirmPassword,
+        subscribeToNews,
+        agreeToTerms,
+      }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const { error } = data
+        if (error) {
+          this.setState({
+            pending: false,
+            error,
+          })
+          return
+        }
+
+        const { step } = data
+        Router.push(applicationRoute(step))
+      })
+      .catch((err) => {
+        this.setState({
+          pending: false,
+          error: err.message || DEFAULT_ERROR,
+        })
+      })
   }
 
   render() {
@@ -57,12 +126,17 @@ class Third extends Component {
       confirmPassword,
       subscribeToNews,
       agreeToTerms,
+      error,
+      pending,
     } = this.state
 
     return (
       <FormWrapper>
         <Title>Login information</Title>
-        <form>
+
+        <ErrorMessage message={error} />
+
+        <form onSubmit={this.handleSubmit}>
           <Input
             label="Email"
             name="email"
@@ -97,13 +171,12 @@ class Third extends Component {
             onChange={this.handleChange}
           />
 
-          <Btn
-            href={applicationRoute(4)}
+          <BtnInput
             fullWidth
+            type="submit"
             disabled={this.isDisabled()}
-          >
-            Next
-          </Btn>
+            value={pending ? 'Loading...' : 'Next'}
+          />
         </form>
       </FormWrapper>
     )
