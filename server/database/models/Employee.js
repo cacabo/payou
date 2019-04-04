@@ -65,7 +65,14 @@ const EmployeeSchema = new Schema({
   phone: {
     type: String,
     validate: {
-      validator: v => /\d{3}-\d{3}-\d{4}/.test(v),
+      validator: (v) => {
+        const formats = '(999)999-9999|999-999-9999|9999999999|(999) 999-9999|99999999999'
+        const r = RegExp(`^(${formats
+          .replace(/([()])/g, '\\$1')
+          .replace(/9/g, '\\d')
+        })$`)
+        return r.test(v)
+      },
       message: props => `${props.value} is not a valid phone number!`,
     },
   },
@@ -74,7 +81,6 @@ const EmployeeSchema = new Schema({
   // Step 3
   email: {
     type: String,
-    unique: true,
     maxLength: 500,
     minLength: 1,
     validate: {

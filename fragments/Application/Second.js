@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import fetch from 'unfetch'
+import Router from 'next/router'
 
 import {
   FormWrapper,
@@ -7,11 +9,14 @@ import {
   Input,
   Row,
   Col,
-  Btn,
+  BtnInput,
   ColSpace,
   Label,
+  ErrorMessage,
 } from '../../components'
-import { applicationRoute } from '../../constants/routes'
+import { getAppId } from '../../store'
+import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
+import { DEFAULT_ERROR } from '../../constants/text'
 
 const dayOptions = [{ value: -1, text: 'Select' }]
 for (let i = 1; i <= 31; i += 1) {
@@ -42,11 +47,22 @@ class Second extends Component {
         year: -1,
       },
       phone: '',
+      pending: false,
+      error: '',
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleChangeDOB = this.handleChangeDOB.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    const id = getAppId()
+
+    if (!id) {
+      Router.push(NEW_APPLICATION_ROUTE)
+    }
   }
 
   handleChange(event) {
@@ -69,6 +85,7 @@ class Second extends Component {
 
   isDisabled() {
     const {
+      pending,
       firstName,
       lastName,
       dateOfBirth: {
@@ -89,13 +106,66 @@ class Second extends Component {
       && month > 0
       && year > 0
       && phone
+      && !pending
     )
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    if (this.isDisabled()) return
+
+    this.setState({ pending: true })
+
+    const {
+      firstName,
+      lastName,
+      suffix,
+      dateOfBirth,
+      phone,
+    } = this.state
+    const id = getAppId()
+
+    fetch(postApplicationRoute(2), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        firstName,
+        lastName,
+        suffix,
+        dateOfBirth,
+        phone,
+      }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const { error } = data
+        if (error) {
+          this.setState({
+            pending: false,
+            error,
+          })
+          return
+        }
+
+        const { step } = data
+
+        Router.push(applicationRoute(step))
+      })
+      .catch((err) => {
+        this.setState({
+          pending: false,
+          error: err.message || DEFAULT_ERROR,
+        })
+      })
   }
 
   render() {
     const {
       firstName,
       lastName,
+      error,
+      pending,
       suffix,
       dateOfBirth: {
         day,
@@ -108,7 +178,10 @@ class Second extends Component {
     return (
       <FormWrapper>
         <Title>Basic info</Title>
-        <form>
+
+        <ErrorMessage message={error} />
+
+        <form onSubmit={this.handleSubmit}>
           <Input
             type="string"
             label="First name"
@@ -175,21 +248,20 @@ class Second extends Component {
           <hr />
 
           <Input
-            type="tel"
+            type="number"
             label="Cell phone number"
             name="phone"
-            placeholder="(123) 456-7890"
+            placeholder="1234567890"
             value={phone}
             onChange={this.handleChange}
           />
 
-          <Btn
-            href={applicationRoute(3)}
+          <BtnInput
+            type="submit"
             fullWidth
             disabled={this.isDisabled()}
-          >
-            Next
-          </Btn>
+            value={pending ? 'Loading...' : 'Next'}
+          />
         </form>
       </FormWrapper>
     )

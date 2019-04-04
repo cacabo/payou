@@ -108,5 +108,8 @@ module.exports = function leadsRouter(DB) {
   })
 
 
+  router.all((req, res) => res.status(404).send())
+
+
   return router
 }

@@ -10,10 +10,11 @@ const Employee = require('./models/Employee')
 const { SALT_ROUNDS } = process.env
 
 
-function getEmployee(id) {
+async function getEmployee(id) {
   if (!id) throw new Error('Employee ID required')
-  const e = Employee.findById(id)
+  const e = await Employee.findById(id)
   if (!e) throw new Error('Employee not found')
+  return e
 }
 
 
@@ -25,21 +26,30 @@ function execEmployeeAppStep1({
     loanAmount,
     loanTerm,
     step: 2,
-  })
+  }).save()
 }
 
 
 function execEmployeeAppStep2({
-  _id,
+  id,
   firstName,
   lastName,
   suffix,
   dateOfBirth,
   phone,
 }) {
+  console.log('BODY', {
+    id,
+    firstName,
+    lastName,
+    suffix,
+    dateOfBirth,
+    phone,
+  })
+
   return new Promise((resolve, reject) => {
-    try {
-      const e = getEmployee(_id)
+    getEmployee(id).then((e) => {
+      console.log('employee', e)
 
       if (
         !firstName
@@ -68,15 +78,14 @@ function execEmployeeAppStep2({
       e.save()
         .then(resolve)
         .catch(reject)
-    } catch (e) {
-      reject(e)
-    }
+    })
+      .catch(reject)
   })
 }
 
 
 function execEmployeeAppStep3({
-  _id,
+  id,
   email,
   confirmEmail,
   password,
@@ -86,7 +95,7 @@ function execEmployeeAppStep3({
 }) {
   return new Promise((resolve, reject) => {
     try {
-      const e = getEmployee(_id)
+      const e = getEmployee(id)
 
       if (e.step < 3) {
         throw new Error('You must complete other steps before this one')
@@ -139,7 +148,7 @@ function execEmployeeAppStep3({
 
 
 function execEmployeeAppStep4({
-  _id,
+  id,
   payrollId,
   grossAnnualIncome,
   otherIncome,
@@ -148,7 +157,7 @@ function execEmployeeAppStep4({
 }) {
   return new Promise((resolve, reject) => {
     try {
-      const e = getEmployee(_id)
+      const e = getEmployee(id)
 
       if (e.step < 4) {
         throw new Error('Please complete earlier steps')
@@ -190,7 +199,7 @@ function execEmployeeAppStep4({
 
 
 function execEmployeeAppStep5({
-  _id,
+  id,
   address,
   timeAtAddress,
   residentialStatus,
@@ -198,7 +207,7 @@ function execEmployeeAppStep5({
 }) {
   return new Promise((resolve, reject) => {
     try {
-      const e = getEmployee(_id)
+      const e = getEmployee(id)
 
       if (e.step < 5) {
         throw new Error('Please complete earlier steps')
@@ -256,7 +265,7 @@ function execEmployeeAppStep5({
 
 
 function execEmployeeAppStep6({
-  _id,
+  id,
   ssn,
   numberOfFinancialDependents,
   civilStatus,
@@ -264,7 +273,7 @@ function execEmployeeAppStep6({
 }) {
   return new Promise((resolve, reject) => {
     try {
-      const e = getEmployee(_id)
+      const e = getEmployee(id)
 
       if (e.step < 6) {
         throw new Error('Please complete prior steps')
@@ -298,11 +307,11 @@ function execEmployeeAppStep6({
 
 
 function execEmployeeAppStep7({
-  _id,
+  id,
 }) {
   return new Promise((resolve, reject) => {
     try {
-      const e = getEmployee(_id)
+      const e = getEmployee(id)
 
       if (e.step < 7) {
         throw new Error('Please complete all steps before this')
