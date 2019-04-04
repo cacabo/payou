@@ -15,7 +15,10 @@ const styles = css`
   font-weight: 500;
   text-align: center;
 
-  ${({ fullWidth }) => fullWidth && ('width: 100%;')}
+  ${({ fullWidth }) => fullWidth && (`
+    width: 100%;
+    margin-top: 0.5rem;
+  `)}
 
   &:hover {
     background: ${MIDNIGHT};
@@ -28,6 +31,11 @@ const styles = css`
     color: ${WHITE};
     text-decoration: none;
   }
+
+  ${({ disabled }) => disabled && (`
+    opacity: 0.5;
+    cursor: not-allowed;
+  `)}
 `
 
 export const BtnInput = s.input`${styles}`
@@ -49,9 +57,11 @@ export const Btn = ({
   href,
   children,
   fullWidth,
+  disabled,
+  ...other
 }) => (
-  <Link href={href}>
-    <BtnWrapper fullWidth={fullWidth}>
+  <Link href={disabled ? '#' : href}>
+    <BtnWrapper fullWidth={fullWidth} disabled={disabled} {...other}>
       {children}
     </BtnWrapper>
   </Link>
@@ -59,9 +69,11 @@ export const Btn = ({
 
 Btn.defaultProps = {
   fullWidth: false,
+  disabled: false,
 }
 
 Btn.propTypes = {
+  disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,

@@ -51,8 +51,10 @@ const styles = `
 `
 
 const SelectTag = s.select`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   ${styles}
-  line-height: 2;
 `
 
 export const Label = s.label`
@@ -67,12 +69,14 @@ export const Select = ({
   label,
   name,
   smallLabel,
+  value,
+  ...other
 }) => (
   <>
     {label && <Label htmlFor={name} small={smallLabel}>{label}</Label>}
-    <SelectTag id={name} name={name}>
-      {options.map(({ value, text }) => (
-        <option value={value} key={value || text}>
+    <SelectTag id={name} name={name} value={value} {...other}>
+      {options.map(({ value: v, text }) => (
+        <option value={v} key={`${name}-${v || text}`}>
           {text}
         </option>
       ))}
@@ -93,6 +97,7 @@ Select.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   smallLabel: PropTypes.bool,
+  value: PropTypes.any.isRequired, // eslint-disable-line
 }
 
 const InputTag = s.input`
@@ -104,9 +109,9 @@ const CheckboxLabel = s(Label)`
   transform: translateY(0.1rem);
 `
 
-export const Checkbox = ({ label, name }) => (
+export const Checkbox = ({ label, name, ...other }) => (
   <>
-    <input type="checkbox" name={name} id={name} />
+    <input type="checkbox" name={name} id={name} {...other} />
     <CheckboxLabel inline htmlFor={name}>
       {label}
     </CheckboxLabel>
@@ -175,6 +180,10 @@ const Wrapper = s.div`
 
   ${minWidth(MD)} {
     padding: 1.5rem;
+  }
+
+  form {
+    margin-bottom: 0;
   }
 `
 
