@@ -9,6 +9,7 @@ module.exports = {
   APPLICATION_ROUTE: '/applications/:step',
   applicationRoute: step => `/applications/${step}`,
 
+  getApplicationRoute: id => `/api/applications/${id}`,
   POST_APPLICATION_ROUTE: '/api/applications/:step',
   postApplicationRoute: step => `/api/applications/${step}`,
 

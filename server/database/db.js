@@ -337,6 +337,8 @@ module.exports = {
   createEmployerLead,
   createEmployeeLead,
 
+  getEmployee,
+
   execEmployeeAppStep1,
   execEmployeeAppStep2,
   execEmployeeAppStep3,

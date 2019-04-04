@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Router from 'next/router'
+import fetch from 'unfetch'
 
 import states from '../../constants/states'
 import residentialStatusData from '../../constants/residentialStatusOptions'
@@ -6,14 +8,17 @@ import {
   FormWrapper,
   Title,
   Label,
-  Btn,
+  BtnInput,
   Input,
   Select,
   Row,
   Col,
   ColSpace,
+  ErrorMessage,
 } from '../../components'
-import { applicationRoute } from '../../constants/routes'
+import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
+import { DEFAULT_ERROR } from '../../constants/text'
+import { getAppId } from '../../store'
 
 const stateOptions = [{ value: '', text: 'Select' }]
 states.forEach(state => stateOptions.push({ value: state, text: state }))
@@ -26,6 +31,8 @@ class Fifth extends Component {
     super(props)
 
     this.state = {
+      error: '',
+      pending: false,
       address: {
         address1: '',
         address2: '',
@@ -41,6 +48,13 @@ class Fifth extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleChangeAddr = this.handleChangeAddr.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    if (!getAppId()) {
+      Router.push(NEW_APPLICATION_ROUTE)
+    }
   }
 
   handleChange(event) {
@@ -62,8 +76,58 @@ class Fifth extends Component {
     this.setState({ address: newAddress })
   }
 
+  // TODO abstract this function away
+
+  handleSubmit(event) {
+    event.preventDefault()
+    if (this.isDisabled()) return
+
+    this.setState({ pending: true })
+
+    const {
+      address,
+      timeAtAddress,
+      residentialStatus,
+      residentialStatusExplanation,
+    } = this.state
+    const id = getAppId()
+
+    fetch(postApplicationRoute(5), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        address,
+        timeAtAddress,
+        residentialStatus,
+        residentialStatusExplanation,
+      }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const { error } = data
+        if (error) {
+          this.setState({
+            pending: false,
+            error,
+          })
+          return
+        }
+
+        const { step } = data
+        Router.push(applicationRoute(step))
+      })
+      .catch((err) => {
+        this.setState({
+          pending: false,
+          error: err.message || DEFAULT_ERROR,
+        })
+      })
+  }
+
   isDisabled() {
     const {
+      pending,
       address: {
         address1,
         city,
@@ -85,11 +149,14 @@ class Fifth extends Component {
       && timeAtAddress !== null
       && residentialStatus
       && (residentialStatus !== 'Other' || residentialStatusExplanation)
+      && !pending
     )
   }
 
   render() {
     const {
+      error,
+      pending,
       address: {
         address1,
         address2,
@@ -105,7 +172,10 @@ class Fifth extends Component {
     return (
       <FormWrapper>
         <Title>Personal Information</Title>
-        <form>
+
+        <ErrorMessage message={error} />
+
+        <form onSubmit={this.handleSubmit}>
           <Label>Address</Label>
           <Input
             smallLabel
@@ -186,13 +256,12 @@ class Fifth extends Component {
             />
           )}
 
-          <Btn
-            href={applicationRoute(6)}
+          <BtnInput
+            type="submit"
             fullWidth
             disabled={this.isDisabled()}
-          >
-            Next
-          </Btn>
+            value={pending ? 'Loading...' : 'Next'}
+          />
         </form>
       </FormWrapper>
     )

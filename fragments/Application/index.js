@@ -16,6 +16,7 @@ import Fourth from './Fourth'
 import Fifth from './Fifth'
 import Sixth from './Sixth'
 import Review from './Review'
+import Confirmation from './Confirmation'
 
 import { applicationRoute } from '../../constants/routes'
 
@@ -52,6 +53,8 @@ const Application = ({ step }) => {
     case 6: return (<Sixth />)
 
     case 7: return (<Review />)
+
+    case 8: return (<Confirmation />)
 
     default:
       return null // TODO 404

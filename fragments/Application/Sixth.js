@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
+import fetch from 'unfetch'
+import Router from 'next/router'
 
 import {
   FormWrapper,
   Title,
   Checkbox,
-  Btn,
+  BtnInput,
+  ErrorMessage,
   Input,
 } from '../../components'
-import { applicationRoute } from '../../constants/routes'
+import { getAppId } from '../../store'
+import { DEFAULT_ERROR } from '../../constants/text'
+import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
 
 
 class Sixth extends Component {
@@ -18,11 +23,20 @@ class Sixth extends Component {
       ssn: '',
       numberOfFinancialDependents: '',
       civilStatus: '',
+      error: '',
       expectsChangesToEmploymentStatus: false,
+      pending: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    if (!getAppId()) {
+      Router.push(NEW_APPLICATION_ROUTE)
+    }
   }
 
   handleChange(event) {
@@ -39,6 +53,7 @@ class Sixth extends Component {
       ssn,
       numberOfFinancialDependents,
       civilStatus,
+      pending,
     } = this.state
 
     return !(
@@ -46,7 +61,53 @@ class Sixth extends Component {
       && numberOfFinancialDependents !== undefined
       && numberOfFinancialDependents !== null
       && civilStatus
+      && !pending
     )
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    if (this.isDisabled()) return
+
+    this.setState({ pending: true })
+
+    const {
+      ssn,
+      numberOfFinancialDependents,
+      civilStatus,
+    } = this.state
+    const id = getAppId()
+
+    fetch(postApplicationRoute(6), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        ssn,
+        numberOfFinancialDependents,
+        civilStatus,
+      }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const { error } = data
+        if (error) {
+          this.setState({
+            pending: false,
+            error,
+          })
+          return
+        }
+
+        const { step } = data
+        Router.push(applicationRoute(step))
+      })
+      .catch((err) => {
+        this.setState({
+          pending: false,
+          error: err.message || DEFAULT_ERROR,
+        })
+      })
   }
 
   render() {
@@ -55,12 +116,17 @@ class Sixth extends Component {
       numberOfFinancialDependents,
       civilStatus,
       expectsChangesToEmploymentStatus,
+      error,
+      pending,
     } = this.state
 
     return (
       <FormWrapper>
         <Title>Personal Information (cont.)</Title>
-        <form>
+
+        <ErrorMessage message={error} />
+
+        <form onSubmit={this.handleSubmit}>
           <Input
             label="Social Security Number"
             name="ssn"
@@ -89,9 +155,12 @@ class Sixth extends Component {
             onChange={this.handleChange}
           />
 
-          <Btn href={applicationRoute(7)} fullWidth disabled={this.isDisabled()}>
-            Next
-          </Btn>
+          <BtnInput
+            type="submit"
+            fullWidth
+            disabled={this.isDisabled()}
+            value={pending ? 'Loading...' : 'Next'}
+          />
         </form>
       </FormWrapper>
     )

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Router from 'next/router'
+import fetch from 'unfetch'
 
 import {
   FormWrapper,
@@ -9,9 +11,12 @@ import {
   Input,
   Select,
   Label,
-  Btn,
+  ErrorMessage,
+  BtnInput,
 } from '../../components'
-import { applicationRoute } from '../../constants/routes'
+import { postApplicationRoute, NEW_APPLICATION_ROUTE, applicationRoute } from '../../constants/routes'
+import { getAppId } from '../../store'
+import { DEFAULT_ERROR } from '../../constants/text'
 
 const monthOptions = [{ value: -1, text: 'Select' }]
 for (let j = 1; j <= 12; j += 1) {
@@ -33,6 +38,8 @@ class Fourth extends Component {
     super(props)
 
     this.state = {
+      error: '',
+      pending: false,
       payrollId: '',
       grossAnnualIncome: 0,
       otherIncome: 0,
@@ -46,6 +53,13 @@ class Fourth extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    if (!getAppId()) {
+      Router.push(NEW_APPLICATION_ROUTE)
+    }
   }
 
   handleChange(event) {
@@ -67,6 +81,55 @@ class Fourth extends Component {
     this.setState({ employmentStartDate: newStartDate })
   }
 
+  handleSubmit(event) {
+    event.preventDefault()
+    if (this.isDisabled()) return
+
+    this.setState({ pending: true })
+
+    const {
+      payrollId,
+      grossAnnualIncome,
+      otherIncome,
+      employmentStartDate,
+      paycycle,
+    } = this.state
+    const id = getAppId()
+
+    fetch(postApplicationRoute(4), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        payrollId,
+        grossAnnualIncome,
+        otherIncome,
+        employmentStartDate,
+        paycycle,
+      }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const { error } = data
+        if (error) {
+          this.setState({
+            pending: false,
+            error,
+          })
+          return
+        }
+
+        const { step } = data
+        Router.push(applicationRoute(step))
+      })
+      .catch((err) => {
+        this.setState({
+          pending: false,
+          error: err.message || DEFAULT_ERROR,
+        })
+      })
+  }
+
   isDisabled() {
     const {
       payrollId,
@@ -77,6 +140,7 @@ class Fourth extends Component {
         year,
       },
       paycycle,
+      pending,
     } = this.state
 
     return !(
@@ -91,12 +155,15 @@ class Fourth extends Component {
       && month > 0
       && year > 0
       && paycycle > 0
+      && !pending
     )
   }
 
   render() {
     const {
+      pending,
       payrollId,
+      error,
       grossAnnualIncome,
       otherIncome,
       employmentStartDate: {
@@ -109,7 +176,10 @@ class Fourth extends Component {
     return (
       <FormWrapper>
         <Title>Employment details</Title>
-        <form>
+
+        <ErrorMessage message={error} />
+
+        <form onSubmit={this.handleSubmit}>
           <Input
             label="Payroll ID"
             name="payrollId"
@@ -168,13 +238,13 @@ class Fourth extends Component {
             onChange={this.handleChange}
           />
 
-          <Btn
+          <BtnInput
+            type="submit"
             href={applicationRoute(5)}
             fullWidth
             disabled={this.isDisabled()}
-          >
-            Next
-          </Btn>
+            value={pending ? 'Loading...' : 'Next'}
+          />
         </form>
       </FormWrapper>
     )

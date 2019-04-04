@@ -43,7 +43,7 @@ export const ErrorMessage = ({ message = '' }) => {
 
   return (
     <ErrorWrapper>
-      <Text>{message}</Text>
+      <Text color={RED}>{message}</Text>
     </ErrorWrapper>
   )
 }
@@ -61,7 +61,7 @@ export const SuccessMessage = ({ message = '' }) => {
 
   return (
     <SuccessWrapper>
-      <Text>{message}</Text>
+      <Text color={GREENER}>{message}</Text>
     </SuccessWrapper>
   )
 }

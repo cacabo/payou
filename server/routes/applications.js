@@ -6,6 +6,72 @@ module.exports = function applicationsRoute(DB) {
       .json({ success: true })
   })
 
+  router.get('/:id', (req, res) => {
+    const { params: { id } } = req
+
+    console.log('ID', id)
+
+    DB.getEmployee(id)
+      .then((data) => {
+        const {
+          loanAmount,
+          loanTerm,
+          firstName,
+          lastName,
+          suffix,
+          dateOfBirth,
+          phone,
+          email,
+          subscribeToNews,
+          agreeToTerms,
+          payrollId,
+          grossAnnualIncome,
+          otherIncome,
+          employmentStartDate,
+          paycycle,
+          address,
+          timeAtAddress,
+          residentialStatus,
+          residentialStatusExplanation,
+          ssn,
+          numberOfFinancialDependents,
+          civilStatus,
+          expectsChangesToEmploymentStatus,
+        } = data
+        const lastTwo = ssn.substring(ssn.length - 2)
+        const cleanedData = Object.assign({}, {
+          loanAmount,
+          loanTerm,
+          firstName,
+          lastName,
+          suffix,
+          dateOfBirth,
+          phone,
+          email,
+          subscribeToNews,
+          agreeToTerms,
+          payrollId,
+          grossAnnualIncome,
+          otherIncome,
+          employmentStartDate,
+          paycycle,
+          address,
+          timeAtAddress,
+          residentialStatus,
+          residentialStatusExplanation,
+          ssn,
+          numberOfFinancialDependents,
+          civilStatus,
+          expectsChangesToEmploymentStatus,
+        }, {
+          password: '••••••••••••••••',
+          ssn: `***-**-**${lastTwo}`,
+        })
+        res.status(200).send(cleanedData)
+      })
+      .catch(err => res.status(404).send({ error: err.message }))
+  })
+
   router.post('/:step', (req, res) => {
     let { step } = req.params
 

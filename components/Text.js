@@ -16,7 +16,11 @@ export const Title = s.h2`
 `
 
 export const Text = s.p`
-  color: ${({ white }) => (white ? WHITE : DARK_GRAY)};
+  color: ${({ white, color }) => {
+    if (white) return WHITE
+    if (color) return color
+    return DARK_GRAY
+  }};
   ${({ big }) => big && 'font-size: 125%;'}
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
 `
