@@ -33,7 +33,7 @@ export const TextList = s.ul`
 `
 
 export const MediumText = s(Text)`
-  color: ${({ color }) => color || BLACK};
+  color: ${({ color, white }) => color || (white && WHITE) || BLACK};
   font-weight: 500;
 `
 
