@@ -16,13 +16,16 @@ export const Title = s.h2`
 `
 
 export const Text = s.p`
+  line-height: 1.45;
   color: ${({ white, color }) => {
     if (white) return WHITE
     if (color) return color
     return DARK_GRAY
   }};
+  ${({ translucent }) => translucent && 'opacity: 0.9;'}
   ${({ big }) => big && 'font-size: 125%;'}
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
+  ${({ medium }) => medium && 'font-weight: 500;'}
 `
 
 export const TextList = s.ul`

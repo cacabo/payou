@@ -9,6 +9,7 @@ export const DARK_SLATE = '#4b5658'
 export const DARK_GRAY = '#576366'
 export const BLACK = '#000'
 export const BORDER = 'rgba(0, 0, 0, 0.05)'
+export const SHADE = 'rgba(0, 0, 0, 0.15)'
 
 // Primary colors
 export const MINT = '#cbf2d6'

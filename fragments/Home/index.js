@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 
 import Process from './Process'
+import About from './About'
 import Purpose from './Purpose'
 import Hero from './Hero'
 import Solution from './Solution'
 import Problem from './Problem'
 import Comparison from './Comparison'
 import EmployeeLeadModal from './EmployeeLeadModal'
+import ChevronDown from './ChevronDown'
 
 import {
   Container,
@@ -39,15 +41,12 @@ class Home extends Component {
     return (
       <>
         <Hero />
-
+        <ChevronDown />
+        <About />
         <Solution />
-
         <Comparison />
-
         <Purpose />
-
         <Problem />
-
         <Section>
           <Container>
             <Preheading>Our company</Preheading>
