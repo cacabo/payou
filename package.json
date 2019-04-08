@@ -1,5 +1,5 @@
 {
-  "name": "salary-match",
+  "name": "payou",
   "scripts": {
     "dev": "source env.sh && node server.js",
     "build": "next build",
@@ -9,6 +9,9 @@
     "salary",
     "match",
     "salary-match",
+    "payou",
+    "pay",
+    "you",
     "loans",
     "deducted"
   ],

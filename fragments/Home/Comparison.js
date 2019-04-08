@@ -37,9 +37,9 @@ const Stat = s(Text)`
 export default () => (
   <Section>
     <Container>
-      <Preheading>The PAYOU difference</Preheading>
       <Row>
         <Col>
+          <Preheading>The PAYOU difference</Preheading>
           <Title>Loan comparison</Title>
         </Col>
 
