@@ -95,10 +95,10 @@ export default () => (
         ))}
       </StyledRow>
 
-      <StrongText>Our mission is simple</StrongText>
-
-      <Text>
-        {' We want to help these individuals achieve financial stability by providing them with quick and easy access to reasonably priced loans.'}
+      <Text big>
+        <strong>Our mission is simple</strong>
+        &mdash;
+        {'we want to help you achieve financial stability by providing you with quick and easy access to reasonably priced loans.'}
       </Text>
     </Container>
   </Section>

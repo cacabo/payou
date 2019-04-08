@@ -6,7 +6,6 @@ import {
   Preheading,
   Title,
   Text,
-  StrongText,
   List,
 } from '../../components'
 
@@ -41,11 +40,9 @@ export default () => (
 
       <List items={steps} />
 
-      <StrongText marginBottom="0.5rem">
-        The best part?
-      </StrongText>
-      <Text>
-        {'After you apply, your part of the equation is complete. As soon as we approve your loan, we handle the rest!'}
+      <Text big>
+        <strong>The best part?</strong>
+        {' After you apply, your part of the equation is complete. As soon as we approve your loan, we handle the rest!'}
       </Text>
     </Container>
   </Section>
