@@ -1,6 +1,7 @@
 import React from 'react'
 import s from 'styled-components'
 
+
 import {
   Section,
   Container,
@@ -8,18 +9,20 @@ import {
   Title,
   MediumText,
   Text,
-  Flexbox,
-  Flex,
   Row,
   ShiftWrapper,
   Col,
-} from '../../components'
-import { SKY } from '../../constants/colors'
+  ColSpace,
+} from '../../../components'
+import { SKY } from '../../../constants/colors'
+import Stats from './Stats'
+
 
 const FactRow = s(Row)`
   margin-left: -0.5rem;
   margin-right: -0.5rem;
 `
+
 
 const Fact = s(Col)`
   background: ${SKY};
@@ -30,12 +33,6 @@ const Fact = s(Col)`
   margin-bottom: 1rem;
 `
 
-const Icon = s.img`
-  width: auto;
-  height: 3rem;
-  box-sizing: border-box;
-  margin-right: 1.5rem;
-`
 
 export default () => (
   <Section paddingTop="0">
@@ -45,31 +42,18 @@ export default () => (
         <Title>Salary deducted personal loans</Title>
 
         <Row>
-          <Col md={5} lg={4}>
-            <Flexbox marginBottom="1rem">
-              <Icon src="/static/img/icons/discount.svg" alt="Low APR" />
-              <Flex>
-                <MediumText marginBottom="0.25rem">6.99-17%</MediumText>
-                <Text>Interest rate (APR)</Text>
-              </Flex>
-            </Flexbox>
+          <Col md={5}>
+            <Text>
+              {'Personal loans to employees of partnered companies with automatic, fixed-rate, salary deducted payments'}
+            </Text>
 
-            <Flexbox marginBottom="1rem">
-              <Icon src="/static/img/icons/calendar.svg" alt="Low APR" />
-              <Flex>
-                <MediumText marginBottom="0.25rem">3-36 months</MediumText>
-                <Text>Loan period</Text>
-              </Flex>
-            </Flexbox>
-
-            <Flexbox marginBottom="1rem">
-              <Icon src="/static/img/icons/money.svg" alt="Low APR" />
-              <Flex>
-                <MediumText marginBottom="0.25rem">$600-$5000</MediumText>
-                <Text>Loan amount</Text>
-              </Flex>
-            </Flexbox>
+            <Col lg={10} offsetLg={2}>
+              <Stats />
+            </Col>
           </Col>
+
+          <ColSpace />
+
           <Col>
             <FactRow>
               <Fact>
@@ -78,14 +62,14 @@ export default () => (
               </Fact>
 
               <Fact>
-                <MediumText marginBottom="0.25rem">Cost Free</MediumText>
+                <MediumText marginBottom="0.25rem">Risk/Cost Free</MediumText>
                 <Text marginBottom="0">Our software integrates seamlessly with employer payroll systems</Text>
               </Fact>
             </FactRow>
 
             <FactRow>
               <Fact>
-                <MediumText marginBottom="0.25rem">Credit-Damaged and Invisible</MediumText>
+                <MediumText marginBottom="0.25rem">Credit-Damaged and Credit-Invisible</MediumText>
                 <Text marginBottom="0">Our credit rating system allows any employee to apply</Text>
               </Fact>
               <Fact>
