@@ -7,7 +7,7 @@ export default {
   phone: 'Phone',
   email: 'Email',
   password: 'Password',
-  subscribeToNews: 'Subscribe to updates from Payou?',
+  subscribeToNews: 'Subscribe to updates from PAYOU?',
   payrollId: 'Payroll ID',
   grossAnnualIncome: 'Gross annual income',
   otherIncome: 'Other income',

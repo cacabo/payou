@@ -39,7 +39,7 @@ export default () => (
               {'Easy, quick and affordable personal loans'}
             </Title>
             <Text big white>
-              Payou helps you move from debt to savings through salary-deducted personal loans
+              PAYOU helps you move from debt to savings through salary-deducted personal loans
             </Text>
             <Btn href={routes.NEW_APPLICATION_ROUTE}>
               Apply today

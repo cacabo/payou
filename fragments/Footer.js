@@ -78,7 +78,7 @@ export default () => (
   <FooterWrapper>
     <Section>
       <Container>
-        <Logo src="/static/img/logo.svg" alt="Payou logo" />
+        <Logo src="/static/img/logo.svg" alt="logo" />
         <Links>
           {links.map(({ route, text }) => (
             <div key={`${route}-${text}`}>
@@ -91,7 +91,7 @@ export default () => (
           ))}
         </Links>
         <Legal>
-          Payou &copy; 2019, all rights reserved.
+          PAYOU &copy; 2019, all rights reserved.
         </Legal>
       </Container>
     </Section>

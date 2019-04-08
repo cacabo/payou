@@ -162,7 +162,7 @@ class Third extends Component {
             onChange={this.handleChange}
           />
           <Checkbox
-            label="Subscribe to updates from Payou"
+            label="Subscribe to updates from PAYOU"
             name="subscribeToNews"
             checked={subscribeToNews}
             onChange={this.handleChange}

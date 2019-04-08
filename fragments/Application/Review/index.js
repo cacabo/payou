@@ -206,7 +206,7 @@ class Review extends Component {
         <Field title="Email" value={email} />
         <Field title="Password" value={password} />
         <Field
-          title="Subscribe to news from Payou"
+          title="Subscribe to news from PAYOU"
           value={subscribeToNews ? 'Yes' : 'No'}
         />
 

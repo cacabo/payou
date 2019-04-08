@@ -77,7 +77,7 @@ class Nav extends Component {
         <NavWrapper active={active}>
           <Container>
             <Link href={HOME_ROUTE}>
-              <Logo src="/static/img/logo.svg" alt="Payou logo" />
+              <Logo src="/static/img/logo.svg" alt="PAYOU logo" />
             </Link>
             <Bars active={active} onClick={this.toggle} />
             <Links active={active} />

@@ -16,7 +16,7 @@ const Chart = s.img`
 export default () => (
   <Section>
     <Container>
-      <Preheading>The difference</Preheading>
+      <Preheading>The PAYOU difference</Preheading>
       <Title>Loan comparison</Title>
 
       <Chart src="/static/img/loan-comparison.png" />

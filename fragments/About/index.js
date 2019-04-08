@@ -52,11 +52,11 @@ export default () => (
           </Blockquote>
 
           <Text>
-            {'After researching we realized this is a problem that plagues America as a whole, not just students, with over 46% of Americans not being able to cover $400 unexpected expenses and not having access to reasonably priced credit solutions. We believe that metrics used by Credit Bureaus to determine Credit Scores don’t accurately reflect one’s true credit-worthiness, given that employment offers verifying future streams of income could act as better indicators. This drove us to create Payou, which aims to use metrics that more accurately reflect an individual\'s true credit-worthiness, while employing a salary deduction structure for debt payment, greatly reducing default rates and allowing us to offer reasonably priced loans.'}
+            {'After researching we realized this is a problem that plagues America as a whole, not just students, with over 46% of Americans not being able to cover $400 unexpected expenses and not having access to reasonably priced credit solutions. We believe that metrics used by Credit Bureaus to determine Credit Scores don’t accurately reflect one’s true credit-worthiness, given that employment offers verifying future streams of income could act as better indicators. This drove us to create PAYOU, which aims to use metrics that more accurately reflect an individual\'s true credit-worthiness, while employing a salary deduction structure for debt payment, greatly reducing default rates and allowing us to offer reasonably priced loans.'}
           </Text>
 
           <Text>
-            {'We also believe traditional loan providers create a misalignment of incentives by directly compensating for an individual’s chance of defaulting with a higher interest rate, which in turn makes it even harder for them to pay back the loan, increasing default rates. At Payou we compensate for credit scores that reflect a higher chance of default through our salary-link, which significantly reduces default rates, not requiring us to charge higher interest rates, creating a great alignment of incentives with our borrowers.'}
+            {'We also believe traditional loan providers create a misalignment of incentives by directly compensating for an individual’s chance of defaulting with a higher interest rate, which in turn makes it even harder for them to pay back the loan, increasing default rates. At PAYOU we compensate for credit scores that reflect a higher chance of default through our salary-link, which significantly reduces default rates, not requiring us to charge higher interest rates, creating a great alignment of incentives with our borrowers.'}
           </Text>
         </ShiftWrapper>
       </Container>

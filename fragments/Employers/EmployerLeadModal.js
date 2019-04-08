@@ -9,7 +9,7 @@ const EmployerLeadModal = ({ show, toggle }) => (
     <ModalContainer paddingTop="0.5rem">
       <Title>Contact us</Title>
 
-      <p>{'Want to extend the Payou benefit to your employees? Fill this out and we\'ll see how we can meet your needs.'}</p>
+      <p>{'Want to extend the PAYOU benefit to your employees? Fill this out and we\'ll see how we can meet your needs.'}</p>
 
       <Form />
     </ModalContainer>

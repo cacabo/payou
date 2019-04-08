@@ -1,3 +1,3 @@
-# Payou
+# PAYOU
 
-Website for Payou
+Website for PAYOU
