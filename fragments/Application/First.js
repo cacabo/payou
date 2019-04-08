@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import fetch from 'unfetch'
 import Router from 'next/router'
 
+
 import {
   FormWrapper,
   Title,
@@ -12,19 +13,29 @@ import {
 import { DEFAULT_ERROR } from '../../constants/text'
 import { postApplicationRoute, applicationRoute } from '../../constants/routes'
 import { setAppId } from '../../store'
+import titles from './data/titles'
 
-const loanValueOptions = [{ value: -1, text: 'Select' }]
-for (let i = 6; i <= 50; i += 1) {
-  const value = i * 100
-  loanValueOptions.push({ value, text: `$${value}` })
-}
-
-const termOptions = [{ value: -1, text: 'Select' }]
-for (let j = 3; j < 37; j += 1) {
-  termOptions.push({ value: j, text: `${j} months` })
-}
 
 class First extends Component {
+  static getLoanValueOptions() {
+    const loanValueOptions = [{ value: -1, text: 'Select' }]
+    for (let i = 6; i <= 50; i += 1) {
+      const value = i * 100
+      loanValueOptions.push({ value, text: `$${value}` })
+    }
+    return loanValueOptions
+  }
+
+
+  static getTermOptions() {
+    const termOptions = [{ value: -1, text: 'Select' }]
+    for (let j = 3; j < 37; j += 1) {
+      termOptions.push({ value: j, text: `${j} months` })
+    }
+    return termOptions
+  }
+
+
   constructor(props) {
     super(props)
 
@@ -39,6 +50,7 @@ class First extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.isDisabled = this.isDisabled.bind(this)
   }
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -78,6 +90,7 @@ class First extends Component {
       })
   }
 
+
   handleChange(event) {
     const { target } = event
     const value = target.type === 'checkbox' ? target.checked : target.value
@@ -85,6 +98,7 @@ class First extends Component {
 
     this.setState({ [name]: value })
   }
+
 
   isDisabled() {
     const { loanTerm, loanAmount, pending } = this.state
@@ -97,6 +111,7 @@ class First extends Component {
     )
   }
 
+
   render() {
     const {
       loanTerm,
@@ -107,7 +122,7 @@ class First extends Component {
 
     return (
       <FormWrapper>
-        <Title>Loan conditions</Title>
+        <Title>{titles[1]}</Title>
 
         <ErrorMessage message={error} />
 
@@ -115,7 +130,7 @@ class First extends Component {
           <Select
             label="Loan Value"
             name="loanAmount"
-            options={loanValueOptions}
+            options={First.getLoanValueOptions()}
             value={loanAmount}
             onChange={this.handleChange}
           />
@@ -123,7 +138,7 @@ class First extends Component {
           <Select
             label="Term Length"
             name="loanTerm"
-            options={termOptions}
+            options={First.getTermOptions()}
             value={loanTerm}
             onChange={this.handleChange}
           />
@@ -139,5 +154,6 @@ class First extends Component {
     )
   }
 }
+
 
 export default First

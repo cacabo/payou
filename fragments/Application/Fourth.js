@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Router from 'next/router'
 import fetch from 'unfetch'
 
+
 import {
   FormWrapper,
   Title,
@@ -17,23 +18,37 @@ import {
 import { postApplicationRoute, NEW_APPLICATION_ROUTE, applicationRoute } from '../../constants/routes'
 import { getAppId } from '../../store'
 import { DEFAULT_ERROR } from '../../constants/text'
+import titles from './data/titles'
 
-const monthOptions = [{ value: -1, text: 'Select' }]
-for (let j = 1; j <= 12; j += 1) {
-  monthOptions.push({ value: j, text: `${j}` })
-}
-
-const yearOptions = [{ value: -1, text: 'Select' }]
-for (let k = 1950; k <= 2025; k += 1) {
-  yearOptions.push({ value: k, text: `${k}` })
-}
-
-const paycycleOptions = [{ value: -1, text: 'Select' }]
-for (let i = 1; i <= 52; i += 1) {
-  paycycleOptions.push({ value: i, text: `${i} weeks` })
-}
 
 class Fourth extends Component {
+  static getMonthOptions() {
+    const monthOptions = [{ value: -1, text: 'Select' }]
+    for (let j = 1; j <= 12; j += 1) {
+      monthOptions.push({ value: j, text: `${j}` })
+    }
+    return monthOptions
+  }
+
+
+  static getYearOptions() {
+    const yearOptions = [{ value: -1, text: 'Select' }]
+    for (let k = 1950; k <= 2025; k += 1) {
+      yearOptions.push({ value: k, text: `${k}` })
+    }
+    return yearOptions
+  }
+
+
+  static getPaycycleOptions() {
+    const paycycleOptions = [{ value: -1, text: 'Select' }]
+    for (let i = 1; i <= 52; i += 1) {
+      paycycleOptions.push({ value: i, text: `${i} weeks` })
+    }
+    return paycycleOptions
+  }
+
+
   constructor(props) {
     super(props)
 
@@ -56,11 +71,13 @@ class Fourth extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+
   componentDidMount() {
     if (!getAppId()) {
       Router.push(NEW_APPLICATION_ROUTE)
     }
   }
+
 
   handleChange(event) {
     const { target } = event
@@ -71,6 +88,7 @@ class Fourth extends Component {
     this.isDisabled = this.isDisabled.bind(this)
   }
 
+
   handleChangeStartDate(event) {
     const { target } = event
     const value = target.type === 'checkbox' ? target.checked : target.value
@@ -80,6 +98,7 @@ class Fourth extends Component {
     const newStartDate = Object.assign({}, employmentStartDate, { [name]: value })
     this.setState({ employmentStartDate: newStartDate })
   }
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -130,6 +149,7 @@ class Fourth extends Component {
       })
   }
 
+
   isDisabled() {
     const {
       payrollId,
@@ -159,6 +179,7 @@ class Fourth extends Component {
     )
   }
 
+
   render() {
     const {
       pending,
@@ -175,7 +196,7 @@ class Fourth extends Component {
 
     return (
       <FormWrapper>
-        <Title>Employment details</Title>
+        <Title>{titles[4]}</Title>
 
         <ErrorMessage message={error} />
 
@@ -212,7 +233,7 @@ class Fourth extends Component {
                 smallLabel
                 label="Month"
                 name="month"
-                options={monthOptions}
+                options={Fourth.getMonthOptions()}
                 value={month}
                 onChange={this.handleChangeStartDate}
               />
@@ -223,7 +244,7 @@ class Fourth extends Component {
                 smallLabel
                 label="Year"
                 name="year"
-                options={yearOptions}
+                options={Fourth.getYearOptions()}
                 value={year}
                 onChange={this.handleChangeStartDate}
               />
@@ -233,7 +254,7 @@ class Fourth extends Component {
           <Select
             label="Paycycle (weeks)"
             name="paycycle"
-            options={paycycleOptions}
+            options={Fourth.getPaycycleOptions()}
             value={paycycle}
             onChange={this.handleChange}
           />
@@ -250,5 +271,6 @@ class Fourth extends Component {
     )
   }
 }
+
 
 export default Fourth

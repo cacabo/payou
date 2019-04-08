@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import fetch from 'unfetch'
 import Router from 'next/router'
 
+
 import {
   FormWrapper,
   Title,
@@ -17,6 +18,8 @@ import {
   applicationRoute,
 } from '../../constants/routes'
 import { DEFAULT_ERROR } from '../../constants/text'
+import titles from './data/titles'
+
 
 class Third extends Component {
   constructor(props) {
@@ -132,7 +135,7 @@ class Third extends Component {
 
     return (
       <FormWrapper>
-        <Title>Login information</Title>
+        <Title>{titles[3]}</Title>
 
         <ErrorMessage message={error} />
 

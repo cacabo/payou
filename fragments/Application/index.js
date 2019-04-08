@@ -19,13 +19,14 @@ import Review from './Review'
 import Confirmation from './Confirmation'
 
 import { applicationRoute } from '../../constants/routes'
+import titles from './data/titles'
 
 const Application = ({ step }) => {
   switch (step) {
     case 0:
       return (
         <FormWrapper>
-          <Title>{'Let\'s get started'}</Title>
+          <Title>{titles[0]}</Title>
           <Text>To apply, you must...</Text>
 
           <TextList>

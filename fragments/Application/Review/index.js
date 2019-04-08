@@ -2,35 +2,44 @@ import React, { Component } from 'react'
 import fetch from 'unfetch'
 import Router from 'next/router'
 
+
 import {
   FormWrapper,
   Title,
   ErrorMessage,
   ActionBtn,
   Text,
-} from '../../components'
-import { getAppId, clearAppId } from '../../store'
-import { DEFAULT_ERROR } from '../../constants/text'
+} from '../../../components'
+import { getAppId, clearAppId } from '../../../store'
+import { DEFAULT_ERROR } from '../../../constants/text'
 import {
   NEW_APPLICATION_ROUTE,
   applicationRoute,
   postApplicationRoute,
   getApplicationRoute,
-} from '../../constants/routes'
+} from '../../../constants/routes'
+import Field from './ReviewField'
+import titles from '../data/titles'
+
 
 class Review extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       loadingData: true,
       pending: false,
       error: '',
     }
+
     this.isDisabled = this.isDisabled.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderBody = this.renderBody.bind(this)
     this.renderDOB = this.renderDOB.bind(this)
+    this.renderStartDate = this.renderStartDate.bind(this)
+    this.renderAddress = this.renderAddress.bind(this)
   }
+
 
   componentDidMount() {
     const id = getAppId()
@@ -38,8 +47,6 @@ class Review extends Component {
       Router.push(NEW_APPLICATION_ROUTE)
       return
     }
-
-    console.log('ID', id)
 
     fetch(getApplicationRoute(id), {
       method: 'GET',
@@ -62,10 +69,12 @@ class Review extends Component {
       })
   }
 
+
   isDisabled() {
     const { pending, loadingData } = this.state
     return (pending || loadingData)
   }
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -103,18 +112,54 @@ class Review extends Component {
       })
   }
 
+
   renderDOB() {
     const { dateOfBirth: { month, day, year } } = this.state
     return (
-      <>
-        <Text>
-          <strong>Date of birth:</strong>
-          <br />
-          {`Day: ${day}, Month: ${month}, Year: ${year}`}
-        </Text>
-      </>
+      <Field title="Date of birth" value={`${month}/${day}/${year}`} />
     )
   }
+
+
+  renderStartDate() {
+    const { employmentStartDate: { month, year } } = this.state
+    return (
+      <Field
+        title="Employment start date"
+        value={`${month}/${year}`}
+      />
+    )
+  }
+
+
+  renderAddress() {
+    const {
+      address: {
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+      },
+    } = this.state
+
+    return (
+      <Text>
+        <strong>Address:</strong>
+        <br />
+        {address1}
+        <br />
+        {address2}
+        <br />
+        {city}
+        {', '}
+        {state}
+        {' '}
+        {zip}
+      </Text>
+    )
+  }
+
 
   renderBody() {
     const {
@@ -130,9 +175,7 @@ class Review extends Component {
       payrollId,
       grossAnnualIncome,
       otherIncome,
-      employmentStartDate,
       paycycle,
-      address,
       timeAtAddress,
       residentialStatus,
       residentialStatusExplanation,
@@ -147,57 +190,52 @@ class Review extends Component {
 
     return (
       <>
-        <Text>
-          <strong>Loan amount: </strong>
-          {`$${loanAmount}`}
-        </Text>
-        <Text>
-          <strong>Loan term: </strong>
-          {`${loanTerm} months`}
-        </Text>
+        <Field title="Loan amount" value={`$${loanAmount}`} />
+        <Field title="Loan term" value={`${loanTerm} months`} />
 
         <hr />
 
-        <Text>
-          <strong>First name: </strong>
-          {firstName}
-        </Text>
-
-        <Text>
-          <strong>Last name: </strong>
-          {lastName}
-        </Text>
-
-        <Text>
-          <strong>Suffix: </strong>
-          {suffix}
-        </Text>
-
+        <Field title="First name" value={firstName} />
+        <Field title="Last name" value={lastName} />
+        <Field title="Suffix" value={suffix} />
         {this.renderDOB()}
 
         <hr />
 
-        <Text>
-          <strong>Phone: </strong>
-          {phone}
-        </Text>
-
-        <Text>
-          <strong>Email: </strong>
-          {email}
-        </Text>
-
-        <Text>
-          <strong>Password: </strong>
-          {password}
-        </Text>
-
-        <Text>
-          <strong>Subscribe to news from Payou? </strong>
-          {subscribeToNews ? 'Yes' : 'No'}
-        </Text>
+        <Field title="Phone" value={phone} />
+        <Field title="Email" value={email} />
+        <Field title="Password" value={password} />
+        <Field
+          title="Subscribe to news from Payou"
+          value={subscribeToNews ? 'Yes' : 'No'}
+        />
 
         <hr />
+
+        <Field title="Payroll ID" value={payrollId} />
+        <Field title="Gross annual income" value={`$${grossAnnualIncome}`} />
+        <Field title="Gross annual income" value={`$${otherIncome}`} />
+        {this.renderStartDate()}
+        <Field title="Paycycle (weeks)" value={`${paycycle}`} />
+
+        <hr />
+
+        {this.renderAddress()}
+        <Field title="Time at address (months)" value={`${timeAtAddress}`} />
+        <Field title="Residential status" value={residentialStatus} />
+        {residentialStatusExplanation && (
+          <Field title="Explanation" value={residentialStatusExplanation} />
+        )}
+
+        <hr />
+
+        <Field title="SSN" value={ssn} />
+        <Field title="Number of financial dependents" value={`${numberOfFinancialDependents}`} />
+        <Field title="Civil status" value={civilStatus} />
+        <Field
+          title="Expects changes to employment status"
+          value={expectsChangesToEmploymentStatus ? 'Yes' : 'No'}
+        />
       </>
     )
   }
@@ -207,7 +245,7 @@ class Review extends Component {
 
     return (
       <FormWrapper>
-        <Title>Review Application</Title>
+        <Title>{titles[7]}</Title>
 
         <ErrorMessage message={error} />
 
@@ -220,5 +258,6 @@ class Review extends Component {
     )
   }
 }
+
 
 export default Review

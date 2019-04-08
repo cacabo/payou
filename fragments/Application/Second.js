@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import fetch from 'unfetch'
 import Router from 'next/router'
 
+
 import {
   FormWrapper,
   Title,
@@ -17,23 +18,37 @@ import {
 import { getAppId } from '../../store'
 import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
 import { DEFAULT_ERROR } from '../../constants/text'
+import titles from './data/titles'
 
-const dayOptions = [{ value: -1, text: 'Select' }]
-for (let i = 1; i <= 31; i += 1) {
-  dayOptions.push({ value: i, text: `${i}` })
-}
-
-const monthOptions = [{ value: -1, text: 'Select' }]
-for (let j = 1; j <= 12; j += 1) {
-  monthOptions.push({ value: j, text: `${j}` })
-}
-
-const yearOptions = [{ value: -1, text: 'Select' }]
-for (let k = 1900; k <= 2002; k += 1) {
-  yearOptions.push({ value: k, text: `${k}` })
-}
 
 class Second extends Component {
+  static getDayOptions() {
+    const dayOptions = [{ value: -1, text: 'Select' }]
+    for (let i = 1; i <= 31; i += 1) {
+      dayOptions.push({ value: i, text: `${i}` })
+    }
+    return dayOptions
+  }
+
+
+  static getMonthOptions() {
+    const monthOptions = [{ value: -1, text: 'Select' }]
+    for (let j = 1; j <= 12; j += 1) {
+      monthOptions.push({ value: j, text: `${j}` })
+    }
+    return monthOptions
+  }
+
+
+  static getYearOptions() {
+    const yearOptions = [{ value: -1, text: 'Select' }]
+    for (let k = 1900; k <= 2002; k += 1) {
+      yearOptions.push({ value: k, text: `${k}` })
+    }
+    return yearOptions
+  }
+
+
   constructor(props) {
     super(props)
 
@@ -57,11 +72,13 @@ class Second extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+
   componentDidMount() {
     if (!getAppId()) {
       Router.push(NEW_APPLICATION_ROUTE)
     }
   }
+
 
   handleChange(event) {
     const { target } = event
@@ -70,6 +87,7 @@ class Second extends Component {
 
     this.setState({ [name]: value })
   }
+
 
   handleChangeDOB(event) {
     const { target } = event
@@ -80,6 +98,7 @@ class Second extends Component {
     const newDateOfBirth = Object.assign({}, dateOfBirth, { [name]: value })
     this.setState({ dateOfBirth: newDateOfBirth })
   }
+
 
   isDisabled() {
     const {
@@ -107,6 +126,7 @@ class Second extends Component {
       && !pending
     )
   }
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -158,6 +178,7 @@ class Second extends Component {
       })
   }
 
+
   render() {
     const {
       firstName,
@@ -175,7 +196,7 @@ class Second extends Component {
 
     return (
       <FormWrapper>
-        <Title>Basic info</Title>
+        <Title>{titles[2]}</Title>
 
         <ErrorMessage message={error} />
 
@@ -214,7 +235,7 @@ class Second extends Component {
                 smallLabel
                 label="Day"
                 name="day"
-                options={dayOptions}
+                options={Second.getDayOptions()}
                 value={day}
                 onChange={this.handleChangeDOB}
               />
@@ -225,7 +246,7 @@ class Second extends Component {
                 smallLabel
                 label="Month"
                 name="month"
-                options={monthOptions}
+                options={Second.getMonthOptions()}
                 value={month}
                 onChange={this.handleChangeDOB}
               />
@@ -236,7 +257,7 @@ class Second extends Component {
                 smallLabel
                 label="Year"
                 name="year"
-                options={yearOptions}
+                options={Second.getYearOptions()}
                 value={year}
                 onChange={this.handleChangeDOB}
               />
@@ -265,5 +286,6 @@ class Second extends Component {
     )
   }
 }
+
 
 export default Second

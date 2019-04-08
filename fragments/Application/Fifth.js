@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Router from 'next/router'
 import fetch from 'unfetch'
 
+
 import states from '../../constants/states'
 import residentialStatusData from '../../constants/residentialStatusOptions'
 import {
@@ -19,14 +20,24 @@ import {
 import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
 import { DEFAULT_ERROR } from '../../constants/text'
 import { getAppId } from '../../store'
+import titles from './data/titles'
 
-const stateOptions = [{ value: '', text: 'Select' }]
-states.forEach(state => stateOptions.push({ value: state, text: state }))
-
-const residentialStatusOptions = [{ value: '', text: 'Select' }]
-residentialStatusData.forEach(o => residentialStatusOptions.push({ text: o, value: o }))
 
 class Fifth extends Component {
+  static getStateOptions() {
+    const stateOptions = [{ value: '', text: 'Select' }]
+    states.forEach(state => stateOptions.push({ value: state, text: state }))
+    return stateOptions
+  }
+
+
+  static getResidentialStatusOptions() {
+    const residentialStatusOptions = [{ value: '', text: 'Select' }]
+    residentialStatusData.forEach(o => residentialStatusOptions.push({ text: o, value: o }))
+    return residentialStatusOptions
+  }
+
+
   constructor(props) {
     super(props)
 
@@ -51,11 +62,13 @@ class Fifth extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+
   componentDidMount() {
     if (!getAppId()) {
       Router.push(NEW_APPLICATION_ROUTE)
     }
   }
+
 
   handleChange(event) {
     const { target } = event
@@ -65,6 +78,7 @@ class Fifth extends Component {
     this.setState({ [name]: value })
     this.isDisabled = this.isDisabled.bind(this)
   }
+
 
   handleChangeAddr(event) {
     const { target } = event
@@ -76,8 +90,8 @@ class Fifth extends Component {
     this.setState({ address: newAddress })
   }
 
-  // TODO abstract this function away
 
+  // TODO abstract this function away
   handleSubmit(event) {
     event.preventDefault()
     if (this.isDisabled()) return
@@ -125,6 +139,7 @@ class Fifth extends Component {
       })
   }
 
+
   isDisabled() {
     const {
       pending,
@@ -153,6 +168,7 @@ class Fifth extends Component {
     )
   }
 
+
   render() {
     const {
       error,
@@ -171,7 +187,7 @@ class Fifth extends Component {
 
     return (
       <FormWrapper>
-        <Title>Personal Information</Title>
+        <Title>{titles[5]}</Title>
 
         <ErrorMessage message={error} />
 
@@ -206,7 +222,7 @@ class Fifth extends Component {
               <Select
                 smallLabel
                 label="State"
-                options={stateOptions}
+                options={Fifth.getStateOptions()}
                 name="state"
                 value={state}
                 onChange={this.handleChangeAddr}
@@ -239,7 +255,7 @@ class Fifth extends Component {
 
           <Select
             label="Residential Status"
-            options={residentialStatusOptions}
+            options={Fifth.getResidentialStatusOptions()}
             name="residentialStatus"
             value={residentialStatus}
             onChange={this.handleChange}

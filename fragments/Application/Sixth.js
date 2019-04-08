@@ -13,6 +13,7 @@ import {
 import { getAppId } from '../../store'
 import { DEFAULT_ERROR } from '../../constants/text'
 import { NEW_APPLICATION_ROUTE, postApplicationRoute, applicationRoute } from '../../constants/routes'
+import titles from './data/titles'
 
 
 class Sixth extends Component {
@@ -122,7 +123,7 @@ class Sixth extends Component {
 
     return (
       <FormWrapper>
-        <Title>Personal Information (cont.)</Title>
+        <Title>{titles[6]}</Title>
 
         <ErrorMessage message={error} />
 
