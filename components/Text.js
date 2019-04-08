@@ -24,6 +24,7 @@ export const Text = s.p`
   }};
   ${({ translucent }) => translucent && 'opacity: 0.9;'}
   ${({ big }) => big && 'font-size: 125%;'}
+  ${({ small }) => small && 'font-size: 75%;'}
   ${({ marginBottom }) => marginBottom && (`margin-bottom: ${marginBottom};`)}
   ${({ medium }) => medium && 'font-weight: 500;'}
 `

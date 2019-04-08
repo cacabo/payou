@@ -10,7 +10,15 @@ import {
   Row,
   Col,
 } from '../../components'
-import { BORDER, SKY } from '../../constants/colors'
+import {
+  BORDER,
+  SKY,
+  SCOTCH,
+  LAVENDER,
+  SEAFOAM,
+  CREAMSICLE,
+  RUBY,
+} from '../../constants/colors'
 
 const StyledRow = s(Row)`
   border: 1px solid ${BORDER};
@@ -18,7 +26,8 @@ const StyledRow = s(Row)`
 
 const Icon = s.img`
   height: 4rem;
-  background: ${SKY};
+  width: 4rem;
+  background: ${({ background }) => background};
   padding: 0.5rem;
   border-radius: 8px;
   margin-bottom: 0.5rem;
@@ -30,22 +39,38 @@ const StyledCol = s(Col)`
   border: 1px solid ${BORDER};
 `
 
-const icons = [
-  'honeymoon.svg',
-  'ring.svg',
-  'umbrella.svg',
-  'house.svg',
-  'money.svg',
-  'bill.svg',
-]
 
 const content = [
-  'Take that honeymoon trip you’ve always dreamed of',
-  'Buy the woman of your life the engagement ring she deserves',
-  'Take your family on that overdue vacation',
-  'Improve your home',
-  'Refinance any debts you have',
-  'Cover Medical, Auto or Home bills you didn\'t see coming',
+  {
+    text: 'Take that honeymoon trip you’ve always dreamed of',
+    color: SKY,
+    icon: 'honeymoon.svg',
+  },
+  {
+    text: 'Buy the woman of your life the engagement ring she deserves',
+    color: SCOTCH,
+    icon: 'ring.svg',
+  },
+  {
+    text: 'Take your family on that overdue vacation',
+    color: SEAFOAM,
+    icon: 'umbrella.svg',
+  },
+  {
+    text: 'Improve your home',
+    color: RUBY,
+    icon: 'house.svg',
+  },
+  {
+    text: 'Refinance any debts you have',
+    color: LAVENDER,
+    icon: 'money.svg',
+  },
+  {
+    text: 'Cover Medical, Auto or Home bills you didn\'t see coming',
+    color: CREAMSICLE,
+    icon: 'bill.svg',
+  },
 ]
 
 export default () => (
@@ -55,10 +80,10 @@ export default () => (
       <Title>Make the most of the good moments in life</Title>
 
       <StyledRow>
-        {content.map((c, idx) => (
-          <StyledCol sm={12} md={6} lg={4} key={c}>
-            <Icon src={`/static/img/icons/${icons[idx]}`} alt={icons[idx]} />
-            <Text marginBottom="0">{c}</Text>
+        {content.map(({ text, color, icon }) => (
+          <StyledCol sm={12} md={6} lg={4} key={text}>
+            <Icon src={`/static/img/icons/${icon}`} alt={icon} background={color} />
+            <Text marginBottom="0">{text}</Text>
           </StyledCol>
         ))}
       </StyledRow>

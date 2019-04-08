@@ -29,6 +29,11 @@ export const NAVY = '#0a3160'
 export const MIDNIGHT = '#04264f'
 
 // Secondary colors
+export const CREAMSICLE = '#ffeddd'
+export const LAVENDER = '#ece8ff'
+export const RUBY = '#ffe8f2'
+export const SEAFOAM = '#dbffe8'
+export const SCOTCH = '#fff8d1'
 export const PURPLE = '#674993'
 
 // Error colors
