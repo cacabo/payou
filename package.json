@@ -1,6 +1,7 @@
 {
   "name": "payou",
   "scripts": {
+    "create-admin": "source env.sh && node scripts/createAdmin.js",
     "dev": "source env.sh && node server.js",
     "build": "next build",
     "start": "yarn build && NODE_ENV=production node server.js"

@@ -5,6 +5,7 @@ require('./mongooseConnect')
 const EmployerLead = require('./models/EmployerLead')
 const EmployeeLead = require('./models/EmployeeLead')
 const Employee = require('./models/Employee')
+const Admin = require('./models/Admin')
 
 
 const { SALT_ROUNDS } = process.env
@@ -16,6 +17,46 @@ async function getEmployee(id) {
   const e = await Employee.findById(id)
   if (!e) throw new Error('Employee not found')
   return e
+}
+
+
+function hashPassword(password) {
+  return new Promise((resolve, reject) => {
+    if (!password) return reject(new Error('Please enter a password'))
+    if (password.length < 5) return reject(new Error('Password must be at least 5 characters'))
+
+    return bcrypt.genSalt(saltRounds, (err, salt) => {
+      if (err) return reject(err)
+      return bcrypt.hash(password, salt, (hashErr, hash) => {
+        if (hashErr) return reject(hashErr)
+        return resolve(hash)
+      })
+    })
+  })
+}
+
+
+function findAdmin({ email, password }) {
+  if (!password) return Admin.findOne({ email })
+  return new Promise((resolve, reject) => {
+    hashPassword(password)
+      .then(hash => resolve(Admin.findOne({ email, password: hash })))
+      .catch(reject)
+  })
+}
+
+
+function createAdmin({ email, password }) {
+  return new Promise((resolve, reject) => {
+    if (!password) return reject(new Error('Please enter a password'))
+    if (password.length < 5) return reject(new Error('Password must be at least 5 characters'))
+
+    return hashPassword(password)
+      .then(hash => new Admin({ email, password: hash }).save()
+        .then(resolve)
+        .catch(reject))
+      .catch(reject)
+  })
 }
 
 
@@ -104,11 +145,8 @@ function execEmployeeAppStep3({
         throw new Error('Password must be at least 5 characters long')
       }
 
-      bcrypt.genSalt(saltRounds, (err, salt) => {
-        if (err) return reject(err)
-        return bcrypt.hash(password, salt, (hashErr, hash) => {
-          if (hashErr) return reject(hashErr)
-
+      hashPassword(password)
+        .then((hash) => {
           e.email = email
           e.password = hash
           e.subscribeToNews = subscribeToNews
@@ -122,7 +160,7 @@ function execEmployeeAppStep3({
             .then(resolve)
             .catch(reject)
         })
-      })
+        .catch(reject)
     }).catch(reject)
   })
 }
@@ -334,6 +372,9 @@ function createEmployeeLead({
 
 
 module.exports = {
+  createAdmin,
+  findAdmin,
+
   createEmployerLead,
   createEmployeeLead,
 

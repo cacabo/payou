@@ -5,6 +5,8 @@ module.exports = {
   PRIVACY_ROUTE: '/privacy',
   WILD_ROUTE: '*',
 
+  ADMIN_LOGIN_ROUTE: '/admin/login',
+
   NEW_APPLICATION_ROUTE: '/applications/new',
   APPLICATION_ROUTE: '/applications/:step',
   applicationRoute: step => `/applications/${step}`,

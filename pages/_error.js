@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import routes from '../constants/routes'
 import Layout from '../fragments/Layout/index'
@@ -9,10 +10,12 @@ import {
   Btn,
 } from '../components'
 
-export default () => (
+const ErrorPage = ({ status = 404 }) => (
   <Layout>
     <FormWrapper>
-      <Title>404: Page not found</Title>
+      <Title>
+        {`${status}: Page not found`}
+      </Title>
       <Text>
         {'We searched far and wide, but couldn\'t find the page you\'re looking for.'}
       </Text>
@@ -22,3 +25,13 @@ export default () => (
     </FormWrapper>
   </Layout>
 )
+
+ErrorPage.defaultProps = {
+  status: 404,
+}
+
+ErrorPage.propTypes = {
+  status: PropTypes.number,
+}
+
+export default ErrorPage

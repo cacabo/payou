@@ -52,10 +52,12 @@ app.prepare()
       app.render(req, res, routes.HOME_ROUTE)
     ))
 
+    server.get(routes.ADMIN_LOGIN_ROUTE, handle)
     server.get(routes.APPLICATION_ROUTE, handle)
     server.get(routes.ABOUT_ROUTE, handle)
     server.get(routes.EMPLOYERS_ROUTE, handle)
     server.get(routes.PRIVACY_ROUTE, handle)
+    server.get('/_error', handle)
 
     server.get(routes.WILD_ROUTE, (req, res) => (
       app.render(req, res, '/_error')

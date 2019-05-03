@@ -3,7 +3,12 @@ import s, { css } from 'styled-components'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
-import { NAVY, WHITE, MIDNIGHT } from '../constants/colors'
+import {
+  NAVY,
+  WHITE,
+  MIDNIGHT,
+  SKY,
+} from '../constants/colors'
 
 const styles = css`
   background: ${NAVY};
@@ -30,6 +35,11 @@ const styles = css`
   &:active {
     color: ${WHITE};
     text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem ${SKY};
   }
 
   ${({ disabled }) => disabled && (`
