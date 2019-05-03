@@ -128,6 +128,7 @@ class First extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <Select
+            required
             label="Loan Value"
             name="loanAmount"
             options={First.getLoanValueOptions()}
@@ -136,6 +137,7 @@ class First extends Component {
           />
 
           <Select
+            required
             label="Term Length"
             name="loanTerm"
             options={First.getTermOptions()}

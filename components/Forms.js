@@ -57,12 +57,38 @@ const SelectTag = s.select`
   ${styles}
 `
 
-export const Label = s.label`
+const AsteriskTag = s.span`
+  color: #ea3153;
+`
+
+const Asterisk = () => (
+  <AsteriskTag>
+    {' *'}
+  </AsteriskTag>
+)
+
+const LabelTag = s.label`
   color: ${SLATE};
   margin-bottom: 0.5rem;
   display: ${({ inline }) => (inline ? 'inline-block' : 'block')};
   ${({ small }) => small && 'font-size: 80%;'}
 `
+
+export const Label = ({ label, required, ...other }) => (
+  <LabelTag {...other}>
+    {label}
+    {required && <Asterisk />}
+  </LabelTag>
+)
+
+Label.defaultProps = {
+  required: false,
+}
+
+Label.propTypes = {
+  label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+}
 
 export const Select = ({
   options,
@@ -70,10 +96,11 @@ export const Select = ({
   name,
   smallLabel,
   value,
+  required,
   ...other
 }) => (
   <>
-    {label && <Label htmlFor={name} small={smallLabel}>{label}</Label>}
+    {label && <Label htmlFor={name} small={smallLabel} label={label} required={required} />}
     <SelectTag id={name} name={name} value={value} {...other}>
       {options.map(({ value: v, text }) => (
         <option value={v} key={`${name}-${v || text}`}>
@@ -87,9 +114,11 @@ export const Select = ({
 Select.defaultProps = {
   label: null,
   smallLabel: false,
+  required: false,
 }
 
 Select.propTypes = {
+  required: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string,
     value: PropTypes.any,
@@ -128,20 +157,30 @@ export const Input = ({
   label,
   name,
   smallLabel,
+  required,
   ...other
 }) => (
   <>
-    {label && (<Label small={smallLabel} htmlFor={name}>{label}</Label>)}
-    <InputTag name={name} id={name} {...other} />
+    {label && (
+      <Label
+        small={smallLabel}
+        htmlFor={name}
+        label={label}
+        required={required}
+      />
+    )}
+    <InputTag name={name} id={name} required={required} {...other} />
   </>
 )
 
 Input.defaultProps = {
   smallLabel: false,
   label: null,
+  required: false,
 }
 
 Input.propTypes = {
+  required: PropTypes.bool,
   smallLabel: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
