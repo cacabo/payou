@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-require('./mongooseConnect')
+const mongooseConnect = require('./mongooseConnect')
 
 
 const EmployerLead = require('./models/EmployerLead')
@@ -10,6 +10,11 @@ const Admin = require('./models/Admin')
 
 const { SALT_ROUNDS } = process.env
 const saltRounds = parseInt(SALT_ROUNDS, 10)
+
+
+function connect() {
+  return mongooseConnect.connect()
+}
 
 
 async function getEmployee(id) {
@@ -52,9 +57,12 @@ function createAdmin({ email, password }) {
     if (password.length < 5) return reject(new Error('Password must be at least 5 characters'))
 
     return hashPassword(password)
-      .then(hash => new Admin({ email, password: hash }).save()
-        .then(resolve)
-        .catch(reject))
+      .then((hash) => {
+        const admin = new Admin({ email, password: hash })
+        admin.save()
+          .then(resolve)
+          .catch(reject)
+      })
       .catch(reject)
   })
 }
@@ -372,6 +380,8 @@ function createEmployeeLead({
 
 
 module.exports = {
+  connect,
+
   createAdmin,
   findAdmin,
 

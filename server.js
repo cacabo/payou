@@ -13,6 +13,9 @@ const leadsRouter = require('./server/routes/leads')
 const DB = require('./server/database/db')
 
 
+DB.connect()
+
+
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })

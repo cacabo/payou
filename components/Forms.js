@@ -141,9 +141,7 @@ const CheckboxLabel = s(Label)`
 export const Checkbox = ({ label, name, ...other }) => (
   <>
     <input type="checkbox" name={name} id={name} {...other} />
-    <CheckboxLabel inline htmlFor={name}>
-      {label}
-    </CheckboxLabel>
+    <CheckboxLabel inline htmlFor={name} label={label} />
     <br />
   </>
 )

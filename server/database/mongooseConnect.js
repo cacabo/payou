@@ -8,24 +8,32 @@ if (!MONGO_URI) {
   throw new Error('MONGO: MONGO_URI not found in process environment')
 }
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-})
+mongoose.set('useCreateIndex', true)
 
-console.log('MONGO: attempting to connect to database') // eslint-disable-line
+function connect() {
+  return new Promise((resolve, reject) => {
+    mongoose.connect(MONGO_URI, {
+      useNewUrlParser: true,
+    })
 
-mongoose.connection.on('connected', () => {
-  console.log('MONGO: successfully connected to database') // eslint-disable-line
-})
+    console.log('MONGO: attempting to connect to database') // eslint-disable-line
 
-mongoose.connection.on('error', () => {
-  console.log('MONGO: error connecting to database') // eslint-disable-line
-})
+    mongoose.connection.on('connected', () => {
+      console.log('MONGO: successfully connected to database') // eslint-disable-line
+      resolve()
+    })
 
-mongoose.connection.on('disconnected', () => {
-  console.log('MONGO: disconnected from database') // eslint-disable-line
-})
+    mongoose.connection.on('error', () => {
+      console.log('MONGO: error connecting to database') // eslint-disable-line
+      reject()
+    })
 
-mongoose.Promise = global.Promise
+    mongoose.connection.on('disconnected', () => {
+      console.log('MONGO: disconnected from database') // eslint-disable-line
+    })
 
-module.exports = mongoose
+    mongoose.Promise = global.Promise
+  })
+}
+
+module.exports = { connect }

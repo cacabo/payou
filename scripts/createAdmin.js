@@ -3,22 +3,35 @@ const readline = require('readline')
 const DB = require('../server/database/db')
 
 function getInfo() {
-  console.log('\n') // eslint-disable-line
+  DB.connect()
+    .then(() => {
+      console.log('\nCreate a new admin\n') // eslint-disable-line
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      })
 
-  rl.question('Email: ', (email) => {
-    rl.question('Password: ', (password) => {
-      DB.createAdmin({ email, password })
-        .then(() => console.log('Successfully created admin')) // eslint-disable-line
-        .catch(err => console.log(`There was an error creating the admin: ${err.message}`)) // eslint-disable-line
+      rl.question('Email: ', (email) => {
+        rl.question('Password: ', (password) => {
+          rl.close()
+
+          DB.createAdmin({ email, password })
+            .then(() => {
+              console.log('\nSuccessfully created admin') // eslint-disable-line
+              process.exit(0)
+            })
+            .catch((err) => {
+              console.log(`\nThere was an error creating the admin:\n${err.message}`) // eslint-disable-line
+              process.exit(1)
+            })
+        })
+      })
     })
-
-    rl.close()
-  })
+    .catch(() => {
+      console.log('Something went wrong') // eslint-disable-line
+      process.exit(1)
+    })
 }
 
-setTimeout(getInfo, 200)
+getInfo()
